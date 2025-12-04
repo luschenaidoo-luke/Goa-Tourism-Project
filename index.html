@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Visit Goa — Prototype (Student Project)</title>
+  <meta name="description" content="Visit Goa — student project prototype for responsive web design, accessibility and basic SEO." />
+  <meta name="author" content="Luschen Naidoo, Vachhani Vishwa Jitubhai, Wadgaonkar Nayan , Mondal Kongkotika, Sud Akshat Vishal " />
+  <link rel="canonical" href="https://example.edu/visit-goa-proto/" />
+  <meta name="robots" content="index, follow" />
+  <!-- Performance prep -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="js/main.js" type="module"></script>
+</head>
+<body class="page">
+  <header class="site-header" role="banner" aria-label="Visit Goa header">
+    <div class="header-inner">
+      <div class="brand">
+        <a href="index.html" class="logo">Visit Goa</a>
+        <p class="student-note">Student project — for teaching purposes only</p>
+      </div>
+
+      <nav class="primary-nav" role="navigation" aria-label="Main navigation">
+        <ul id="navlist" class="navlist">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="#discover">Attractions</a></li>
+          <li><a href="#beaches">Beaches</a></li>
+          <li><a href="plan.html">Plan Trip</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="maincontent" class="main" role="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-inner">
+        <h1 id="hero-title">Experience Paradise in Goa</h1>
+        <p class="hero-desc">Discover golden beaches, rich heritage, vibrant culture and endless adventures in India's coastal gem.</p>
+        <a class="cta" href="plan.html" role="button" aria-label="Explore Now">Explore Now</a>
+      </div>
+    </section>
+
+    <section id="discover" class="discover" aria-labelledby="discover-title">
+      <h2 id="discover-title">Discover Goa</h2>
+      <ul class="card-grid" role="list" aria-label="Highlights">
+        <li class="card" role="listitem">
+          <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='300'><rect width='100%' height='100%' fill='%23a8d0e6'/></svg>" alt="Palm trees silhouette" />
+          <h3>Pristine Beaches</h3>
+          <p>From lively Baga to serene Palolem — explore the coastline.</p>
+          <a class="more" href="#beaches">Learn More →</a>
+        </li>
+
+        <li class="card" role="listitem">
+          <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='300'><rect width='100%' height='100%' fill='%23f4a261'/></svg>" alt="Historic churches" />
+          <h3>Historic Churches</h3>
+          <p>Visit UNESCO World Heritage Sites and Portuguese architecture.</p>
+          <a class="more" href="#attractions">Learn More →</a>
+        </li>
+
+        <li class="card" role="listitem">
+          <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='300'><rect width='100%' height='100%' fill='%238ecae6'/></svg>" alt="Ancient forts" />
+          <h3>Ancient Forts</h3>
+          <p>Explore centuries-old fortifications with coastal views.</p>
+          <a class="more" href="#attractions">Learn More →</a>
+        </li>
+      </ul>
+    </section>
+
+    <section id="authors" class="authors" aria-labelledby="authors-title">
+      <h2 id="authors-title">Project Authors</h2>
+      <!-- hCard microformat -->
+      <ul class="authors-list">
+        <li class="vcard">
+          <span class="fn">Alice Doe</span> — <a class="email" href="mailto:alice@example.edu">alice@example.edu</a>
+        </li>
+        <li class="vcard">
+          <span class="fn">Bob Smith</span> — <a class="email" href="mailto:bob@example.edu">bob@example.edu</a>
+        </li>
+        <li class="vcard">
+          <span class="fn">Carol Lee</span> — <a class="email" href="mailto:carol@example.edu">carol@example.edu</a>
+        </li>
+      </ul>
+    </section>
+
+    <section id="footer-cta" class="footer-cta" aria-labelledby="footer-cta-title">
+      <h2 id="footer-cta-title">Plan Your Perfect Goa Getaway</h2>
+      <p>Let us help you create unforgettable memories in one of India's most beloved destinations.</p>
+      <a class="cta-secondary" href="plan.html">Start Planning</a>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo" aria-label="Footer">
+    <div class="footer-inner">
+      <p>&copy; 2025 Visit Goa — Student project. For teaching purposes only.</p>
+      <p>Prepared for accessibility: WCAG 2.1 level A</p>
+    </div>
+  </footer>
+</body>
+</html>

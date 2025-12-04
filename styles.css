@@ -1,0 +1,284 @@
+/* ------------------------------
+   RESET + BASE STYLES
+------------------------------ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.primary-nav{
+    display: flex;
+    
+    border-color: black;
+    border-radius: 20%;
+    gap: 20px;
+}
+
+.navlist li{
+    list-style: none;
+    font-size: 18px;
+    font-weight: bold;
+    border-color: black;;
+}
+
+.cta {
+    background-color: #ff6b2c;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f5f7fa;
+    color: #222;
+    line-height: 1.6;
+}
+
+img {
+    width: 100%;
+    border-radius: 8px;
+    display: block;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+}
+
+/* ------------------------------
+   HEADER + NAVBAR
+------------------------------ */
+header {
+    background: white;
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e1e1e1;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: bold;
+    color: #ff6b2c;
+}
+
+.brand {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 210px;
+    font-size: 16px;
+    color: black;
+}
+
+nav ul {
+    display: flex;
+    gap: 25px;
+}
+
+nav ul li a {
+    color: #333;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+nav ul li a:hover {
+    color: #ff6b2c;
+}
+
+/* Mobile menu button */
+#menu-btn {
+    display: none;
+    font-size: 16px;
+    padding: 6px 12px;
+}
+
+/* ------------------------------
+   HERO SECTION
+------------------------------ */
+.hero {
+    background: black;
+    color: white;
+    padding: 100px 40px;
+}
+
+.hero-content {
+    max-width: 600px;
+}
+
+.hero h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.btn-primary {
+    background: #ff6b2c;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 6px;
+    display: inline-block;
+    font-size: 14px;
+}
+
+.btn-primary:hover {
+    background: #e5561b;
+}
+
+/* ------------------------------
+   DISCOVER GOA SECTION
+------------------------------ */
+.section-title {
+    text-align: center;
+    margin: 50px 0 25px;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.cards {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 30px;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+.card {
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.card h3 {
+    font-size: 17px;
+    margin: 10px 0;
+}
+
+.card p {
+    font-size: 14px;
+    color: #444;
+}
+
+.card a {
+    margin-top: 10px;
+    display: inline-block;
+    color: #ff6b2c;
+    font-size: 14px;
+}
+
+/* ------------------------------
+   CTA SECTION
+------------------------------ */
+.cta-section {
+    background: linear-gradient(90deg, #ff6b2c, #ff8c2a);
+    padding: 60px 30px;
+    margin-top: 60px;
+    color: white;
+    text-align: center;
+}
+
+.cta-section h2 {
+    font-size: 22px;
+    margin-bottom: 12px;
+}
+
+.cta-section p {
+    margin-bottom: 25px;
+}
+
+.cta-section .btn-primary {
+    background: white;
+    color: #ff6b2c;
+    font-weight: bold;
+}
+
+.cta-section .btn-primary:hover {
+    background: #f2f2f2;
+}
+
+/* ------------------------------
+   FOOTER
+------------------------------ */
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #222;
+    color: white;
+    margin-top: 40px;
+}
+
+/* ------------------------------
+   RESPONSIVE DESIGN
+------------------------------ */
+
+/* Tablet */
+@media (max-width: 900px) {
+
+    header {
+        padding: 15px 20px;
+    }
+
+    .hero {
+        padding: 80px 20px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+
+    /* Show menu button */
+    #menu-btn {
+        display: block;
+    }
+
+    /* Hide nav by default on mobile */
+    nav ul {
+        display: none;
+        flex-direction: column;
+        background: white;
+        padding: 15px;
+        border: 1px solid #ddd;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    /* Toggle menu */
+    nav.active ul {
+        display: flex;
+    }
+
+    .hero {
+        padding: 60px 20px;
+    }
+
+    .hero h1 {
+        font-size: 28px;
+    }
+
+    .cards {
+        padding: 0 20px;
+    }
+
+    .cta-section {
+        padding: 40px 20px;
+    }
+}
