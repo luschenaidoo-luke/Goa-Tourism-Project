@@ -3,45 +3,380 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Visit Goa</title>
+    <meta name="description" content="Discover the paradise of Goa - pristine beaches, historic churches, ancient forts, vibrant culture and authentic cuisine. Plan your perfect Goa getaway.">
+    <meta name="keywords" content="Goa tourism, Goa beaches, Goa attractions, visit Goa, Goa travel">
+    <meta name="author" content="Student Project Team">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://visitgoa.example.com/">
+    <meta property="og:title" content="Visit Goa - Experience Paradise">
+    <meta property="og:description" content="Discover golden beaches, rich heritage, vibrant culture and endless adventures in India's coastal gem.">
+    <meta property="og:image" content="images/og-image.jpg">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Visit Goa - Experience Paradise">
+    <meta name="twitter:description" content="Discover golden beaches, rich heritage, vibrant culture and endless adventures.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png">
+    
+    <!-- Preload critical fonts for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <title>Visit Goa - Experience Paradise in India's Coastal Gem</title>
     <link rel="stylesheet" href="styles.css">
+    
+    <!-- Structured Data - Organization Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TouristDestination",
+      "name": "Goa",
+      "description": "India's coastal paradise featuring pristine beaches, rich Portuguese heritage, vibrant culture and authentic cuisine",
+      "image": "images/goa-hero.jpg",
+      "url": "https://visitgoa.example.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressRegion": "Goa",
+        "addressCountry": "IN"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "15.2993",
+        "longitude": "74.1240"
+      }
+    }
+    </script>
 </head>
 <body>
-    <header class="navbar">
-        <div class="nav-brand">
-            <span class="location-icon">📍</span>
-            <span>Visit Goa</span>
+    <!-- Educational Notice Banner -->
+    <div class="edu-notice" role="banner" aria-label="Educational notice">
+        <div class="container">
+            <p>
+                <strong>📚 Educational Project Notice:</strong> This website is created by students for educational purposes only. 
+                Not affiliated with official Goa Tourism.
+            </p>
         </div>
-        <nav class="nav-menu">
-            <a href="##home">Home</a>
-            <a href="##attractions">Attractions</a>
-            <a href="##beaches">Beaches</a>
-            <a href="##culture">Culture</a>
-            <a href="##plan">Plan Trip</a>
+    </div>
+
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Header Navigation -->
+    <header class="header" role="banner">
+        <nav class="navbar container" role="navigation" aria-label="Main navigation">
+            <div class="nav-brand">
+                <img src="pictures/Tourismlogo.png" alt="Visit Goa Logo" class="logo" width="32" height="32">
+                <span class="brand-text">Visit Goa</span>
+            </div>
+            
+            <button class="menu-toggle" 
+                    aria-label="Toggle navigation menu" 
+                    aria-expanded="false" 
+                    aria-controls="nav-menu">
+                <span class="hamburger-icon" aria-hidden="true"></span>
+            </button>
+            
+            <ul class="nav-menu" id="nav-menu" role="menubar">
+                <li role="none"><a href="index.html" role="menuitem" aria-current="page">Home</a></li>
+                <li role="none"><a href="attractions.html" role="menuitem">Attractions</a></li>
+                <li role="none"><a href="beaches.html" role="menuitem">Beaches</a></li>
+                <li role="none"><a href="culture.html" role="menuitem">Culture</a></li>
+                <li role="none"><a href="plan.html" role="menuitem">Plan Trip</a></li>
+            </ul>
         </nav>
     </header>
 
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Experience Paradise in Goa</h1>
-            <p>Discover golden beaches, rich heritage, vibrant culture and endless adventures in India's coastal gem.</p>
-            <button class="cta-button">Explore Now</button>
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section class="hero" aria-labelledby="hero-heading">
+            <div class="hero-overlay"></div>
+            <div class="hero-content container">
+                <h1 id="hero-heading" class="hero-title">Experience Paradise in Goa</h1>
+                <p class="hero-subtitle">
+                    Discover golden beaches, rich heritage, vibrant culture and endless adventures 
+                    in India's coastal gem.
+                </p>
+                <a href="#discover" class="cta-button" aria-label="Explore Goa attractions">
+                    Explore Now
+                </a>
+            </div>
+            <div class="hero-scroll" aria-hidden="true">
+                <span>Scroll</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </div>
+        </section>
+
+        <!-- Discover Section with hCard microformat -->
+        <section id="discover" class="discover-section" aria-labelledby="discover-heading">
+            <div class="container">
+                <h2 id="discover-heading" class="section-title">Discover Goa</h2>
+                
+                <div class="cards-grid">
+                    <!-- Card 1: Pristine Beaches with hReview microformat -->
+                    <article class="card hreview" itemscope itemtype="http://schema.org/Place">
+                        <div class="card-image-wrapper">
+                            <img src="pictures/beaches.png" 
+                                 alt="Palm trees against blue sky at Goa beach" 
+                                 class="card-image"
+                                 loading="lazy"
+                                 width="400"
+                                 height="300"
+                                 itemprop="image">
+                            <div class="card-overlay"></div>
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title item" itemprop="name">
+                                <span class="fn">Pristine Beaches</span>
+                            </h3>
+                            <p class="card-description summary" itemprop="description">
+                                From lively Baga to serene Palolem, explore 100+ km of stunning coastline.
+                            </p>
+                            <div class="rating" aria-label="Rating: 4.8 out of 5">
+                                <span class="stars" aria-hidden="true">★★★★★</span>
+                                <span class="rating-value">
+                                    <span class="value">4.8</span>/5
+                                </span>
+                            </div>
+                            <a href="beaches.html" class="learn-more" aria-label="Learn more about Goa beaches">
+                                Learn More →
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Card 2: Historic Churches with GEO microformat -->
+                    <article class="card geo" itemscope itemtype="http://schema.org/Place">
+                        <div class="card-image-wrapper">
+                            <img src="pictures/churches.png" 
+                                 alt="Historic Portuguese church with ornate architecture" 
+                                 class="card-image"
+                                 loading="lazy"
+                                 width="400"
+                                 height="300"
+                                 itemprop="image">
+                            <div class="card-overlay"></div>
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title" itemprop="name">Historic Churches</h3>
+                            <p class="card-description" itemprop="description">
+                                Visit UNESCO World Heritage Sites and magnificent Portuguese architecture.
+                            </p>
+                            <!-- GEO microformat for Basilica of Bom Jesus -->
+                            <div class="location" aria-label="Location: Old Goa">
+                                <span class="geo" itemprop="geo" itemscope itemtype="http://schema.org/GeoCoordinates">
+                                    <meta itemprop="latitude" content="15.5007">
+                                    <meta itemprop="longitude" content="73.9114">
+                                    <abbr class="latitude" title="15.5007">15.50°N</abbr>
+                                    <abbr class="longitude" title="73.9114">73.91°E</abbr>
+                                </span>
+                            </div>
+                            <a href="attractions.html#churches" class="learn-more" aria-label="Learn more about historic churches">
+                                Learn More →
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Card 3: Ancient Forts -->
+                    <article class="card" itemscope itemtype="http://schema.org/TouristAttraction">
+                        <div class="card-image-wrapper">
+                            <img src="pictures/forts.png" 
+                                 alt="Ancient fort walls overlooking the coast" 
+                                 class="card-image"
+                                 loading="lazy"
+                                 width="400"
+                                 height="300"
+                                 itemprop="image">
+                            <div class="card-overlay"></div>
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title" itemprop="name">Ancient Forts</h3>
+                            <p class="card-description" itemprop="description">
+                                Explore centuries-old fortifications with breathtaking coastal views.
+                            </p>
+                            <a href="attractions.html#forts" class="learn-more" aria-label="Learn more about ancient forts">
+                                Learn More →
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Card 4: Water Sports -->
+                    <article class="card" itemscope itemtype="http://schema.org/SportsActivityLocation">
+                        <div class="card-image-wrapper">
+                            <img src="pictures/watersports.png" 
+                                 alt="Person enjoying water sports on Goa beach" 
+                                 class="card-image"
+                                 loading="lazy"
+                                 width="400"
+                                 height="300"
+                                 itemprop="image">
+                            <div class="card-overlay"></div>
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title" itemprop="name">Water Sports</h3>
+                            <p class="card-description" itemprop="description">
+                                Experience parasailing, jet skiing, scuba diving and more thrilling activities.
+                            </p>
+                            <a href="beaches.html#activities" class="learn-more" aria-label="Learn more about water sports">
+                                Learn More →
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Card 5: Goan Cuisine -->
+                    <article class="card" itemscope itemtype="http://schema.org/Restaurant">
+                        <div class="card-image-wrapper">
+                            <img src="pictures/Goancuisine.png" 
+                                 alt="Traditional Goan dishes with spices and flavors" 
+                                 class="card-image"
+                                 loading="lazy"
+                                 width="400"
+                                 height="300"
+                                 itemprop="image">
+                            <div class="card-overlay"></div>
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title" itemprop="name">Goan Cuisine</h3>
+                            <p class="card-description" itemprop="description">
+                                Savor authentic seafood, vindaloo, and unique Indo-Portuguese flavors.
+                            </p>
+                            <a href="culture.html#cuisine" class="learn-more" aria-label="Learn more about Goan cuisine">
+                                Learn More →
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Card 6: Vibrant Culture -->
+                    <article class="card" itemscope itemtype="http://schema.org/Event">
+                        <div class="card-image-wrapper">
+                            <img src="pictures/vibrantculture.png" 
+                                 alt="Colorful traditional Goan festival celebration" 
+                                 class="card-image"
+                                 loading="lazy"
+                                 width="400"
+                                 height="300"
+                                 itemprop="image">
+                            <div class="card-overlay"></div>
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title" itemprop="name">Vibrant Culture</h3>
+                            <p class="card-description" itemprop="description">
+                                Experience colorful festivals, traditional music and art forms of Goa.
+                            </p>
+                            <a href="culture.html" class="learn-more" aria-label="Learn more about Goan culture">
+                                Learn More →
+                            </a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section" aria-labelledby="cta-heading">
+            <div class="container">
+                <h2 id="cta-heading" class="cta-title">Plan Your Perfect Goa Getaway</h2>
+                <p class="cta-description">
+                    Let us help you create unforgettable memories in one of India's most beloved destinations
+                </p>
+                <a href="plan-trip.html" class="cta-button cta-button-large">
+                    Start Planning
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <!-- About Section -->
+                <div class="footer-section">
+                    <h3 class="footer-heading">About</h3>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Goa</a></li>
+                        <li><a href="about.html#history">History</a></li>
+                        <li><a href="about.html#geography">Geography</a></li>
+                        <li><a href="team.html">Project Team</a></li>
+                    </ul>
+                </div>
+
+                <!-- Explore Section -->
+                <div class="footer-section">
+                    <h3 class="footer-heading">Explore</h3>
+                    <ul class="footer-links">
+                        <li><a href="attractions.html">Attractions</a></li>
+                        <li><a href="beaches.html">Beaches</a></li>
+                        <li><a href="culture.html">Culture</a></li>
+                        <li><a href="activities.html">Activities</a></li>
+                    </ul>
+                </div>
+
+                <!-- Travel Info Section -->
+                <div class="footer-section">
+                    <h3 class="footer-heading">Travel Info</h3>
+                    <ul class="footer-links">
+                        <li><a href="plan-trip.html#getting-here">Getting Here</a></li>
+                        <li><a href="plan-trip.html#accommodation">Accommodation</a></li>
+                        <li><a href="plan-trip.html#best-time">Best Time to Visit</a></li>
+                        <li><a href="plan-trip.html#travel-tips">Travel Tips</a></li>
+                    </ul>
+                </div>
+
+                <!-- Connect Section with hCard -->
+                <div class="footer-section vcard">
+                    <h3 class="footer-heading">Connect</h3>
+                    <div class="org">Visit Goa Project</div>
+                    <div class="contact-info">
+                        <div class="email">
+                            <a href="mailto:info@visitgoa-student.edu" class="email">
+                                info@visitgoa-student.edu
+                            </a>
+                        </div>
+                        <div class="adr">
+                            <span class="locality">Educational Institution</span>,
+                            <span class="country-name">India</span>
+                        </div>
+                    </div>
+                    <ul class="footer-links social-links" aria-label="Social media links">
+                        <li><a href="#" aria-label="Facebook">Facebook</a></li>
+                        <li><a href="#" aria-label="Instagram">Instagram</a></li>
+                        <li><a href="#" aria-label="Twitter">Twitter</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 Visit Goa Student Project. Created for Educational Purposes Only.</p>
+                <p class="project-authors">
+                    <strong>Project Authors:</strong> 
+                    <span> Naidoo Luschen, Vachhani Vishwa Jitubhai, Wadgaonkar Nayan, Mondal Kongkotika, Sud Akshat Vishal</span>
+                </p>
+            </div>
         </div>
-    </section>
+    </footer>
 
-    <section class="discover-section">
-        <h2>Discover Goa</h2>
-        <div class="cards-container" id="attractionsContainer">
-            <!-- Cards will be loaded dynamically from JSON -->
-        </div>
-    </section>
+    <!-- Back to Top Button -->
+    <button id="back-to-top" 
+            class="back-to-top" 
+            aria-label="Back to top"
+            title="Back to top">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </button>
 
-    <section class="footer-cta">
-        <h2>Plan Your Perfect Goa Getaway</h2>
-        <p>Let us help you create unforgettable memories in one of India's most beloved destinations</p>
-        <button class="cta-button">Start Planning</button>
-    </section>
-
-    <script src="script.js"></script>
+    <!-- Load JavaScript -->
+    <script src="main.js" defer></script>
+    
+    <!-- Placeholder for future API integration -->
+    <div id="api-data-container" data-api-ready="false" aria-hidden="true"></div>
 </body>
 </html>
