@@ -3,277 +3,553 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Attractions - Visit Goa</title>
+    <meta name="description" content="Explore Goa's top attractions including historic churches, ancient forts, temples, museums and natural wonders. Discover UNESCO World Heritage Sites and cultural landmarks.">
+    <meta name="keywords" content="Goa attractions, Goa tourism, churches, forts, temples, museums, Basilica of Bom Jesus, Aguada Fort">
+    <meta name="author" content="Student Project Team">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Explore Attractions - Visit Goa">
+    <meta property="og:description" content="Discover historic sites, religious landmarks and natural wonders in Goa">
+    <meta property="og:image" content="images/attractions-og.jpg">
+    
+    <!-- Preload fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <title>Explore Attractions - Visit Goa</title>
     <link rel="stylesheet" href="styles.css">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "Goa Attractions",
+      "description": "Top tourist attractions in Goa",
+      "itemListElement": [
+        {
+          "@type": "TouristAttraction",
+          "position": 1,
+          "name": "Basilica of Bom Jesus",
+          "description": "UNESCO World Heritage Site housing St. Francis Xavier's mortal remains",
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": "15.5007",
+            "longitude": "73.9114"
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
+    <!-- Educational Notice Banner -->
+    <div class="edu-notice" role="banner" aria-label="Educational notice">
         <div class="container">
-            <div class="logo">
-                <img src="images/goa-logo.png" alt="Goa Logo">
-                <span>Visit Goa</span>
-            </div>
-            <nav class="nav">
-                <a href="index.html">Home</a>
-                <a href="attractions.html" class="active">Attractions</a>
-                <a href="beaches.html">Beaches</a>
-                <a href="culture.html">Culture</a>
-                <a href="plan-trip.html">Plan Trip</a>
-            </nav>
+            <p>
+                <strong>📚 Educational Project:</strong> This website is created by students for educational purposes only.
+            </p>
         </div>
+    </div>
+
+    <!-- Skip to main content -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Header Navigation -->
+    <header class="header" role="banner">
+        <nav class="navbar container" role="navigation" aria-label="Main navigation">
+            <div class="nav-brand">
+                <img src="pictures/Tourismlogo.png" alt="Visit Goa Logo" class="logo" width="24" height="24">
+                <span class="brand-text">Visit Goa</span>
+            </div>
+            
+            <button class="menu-toggle" 
+                    aria-label="Toggle navigation menu" 
+                    aria-expanded="false" 
+                    aria-controls="nav-menu">
+                <span class="hamburger-icon" aria-hidden="true"></span>
+            </button>
+            
+            <ul class="nav-menu" id="nav-menu" role="menubar">
+                <li role="none"><a href="index.html" role="menuitem">Home</a></li>
+                <li role="none"><a href="attractions.html" role="menuitem" aria-current="page">Attractions</a></li>
+                <li role="none"><a href="beaches.html" role="menuitem">Beaches</a></li>
+                <li role="none"><a href="culture.html" role="menuitem">Culture</a></li>
+                <li role="none"><a href="plan-trip.html" role="menuitem">Plan Trip</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <!-- Hero Section -->
-    <section class="attractions-hero">
-        <div class="container-hero">
-            <h1>Explore Attractions</h1>
-            <p>Discover historic sites, religious landmarks and natural wonders</p>
-        </div>
-    </section>
-
-    <!-- Search and Filter Section -->
-    <section class="search-filter">
-        <div class="container">
-            <div class="search-bar">
-                <i class="fas fa-search"></i>
-                <input type="text" placeholder="Search attractions...">
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section class="attractions-hero" aria-labelledby="hero-heading">
+            <div class="container">
+                <h1 id="hero-heading" class="hero-title">Explore Attractions</h1>
+                <p class="hero-subtitle">
+                    Discover historic sites, religious landmarks and natural wonders
+                </p>
             </div>
-            <div class="filter-tabs">
-                <button class="tab active">All</button>
-                <button class="tab">Churches</button>
-                <button class="tab">Temples</button>
-                <button class="tab">Forts</button>
-                <button class="tab">Museums</button>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Attractions Grid -->
-    <section class="attractions-grid">
-        <div class="container">
-            <div class="grid">
-                <!-- Basilica of Bom Jesus -->
-                <div class="attraction-card">
-                    <img src="images/basilica-bom-jesus.jpg" alt="Basilica of Bom Jesus">
-                    <div class="card-content">
-                        <h3>Basilica of Bom Jesus</h3>
-                        <div class="location">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>Old Goa</span>
-                        </div>
-                        <p>UNESCO World Heritage Site housing St. Francis Xavier's mortal remains.</p>
-                        <div class="card-footer">
-                            <div class="rating">
-                                <i class="fas fa-star"></i>
-                                <span>4.8</span>
-                            </div>
-                            <span class="category church">Church</span>
-                        </div>
+        <!-- Search and Filter Section -->
+        <section class="search-filter-section" aria-labelledby="search-heading">
+            <div class="container">
+                <h2 id="search-heading" class="sr-only">Search and filter attractions</h2>
+                
+                <div class="search-filter-wrapper">
+                    <!-- Search Bar -->
+                    <div class="search-bar" role="search">
+                        <label for="search-input" class="sr-only">Search attractions</label>
+                       
+                        <input 
+                            type="text" 
+                            id="search-input"
+                            placeholder="🔍︎​Search attractions..."
+                            aria-label="Search for attractions">
                     </div>
-                </div>
-
-                <!-- Aguada Fort -->
-                <div class="attraction-card">
-                    <img src="images/aguada-fort.jpg" alt="Aguada Fort">
-                    <div class="card-content">
-                        <h3>Aguada Fort</h3>
-                        <div class="location">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>Candolim</span>
-                        </div>
-                        <p>17th-century Portuguese fort with lighthouse and stunning sea views.</p>
-                        <div class="card-footer">
-                            <div class="rating">
-                                <i class="fas fa-star"></i>
-                                <span>4.6</span>
-                            </div>
-                            <span class="category fort">Fort</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Shri Mangeshi Temple -->
-                <div class="attraction-card">
-                    <img src="images/mangeshi-temple.jpg" alt="Shri Mangeshi Temple">
-                    <div class="card-content">
-                        <h3>Shri Mangeshi Temple</h3>
-                        <div class="location">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>Ponda</span>
-                        </div>
-                        <p>Ancient Hindu temple dedicated to Lord Shiva with beautiful architecture.</p>
-                        <div class="card-footer">
-                            <div class="rating">
-                                <i class="fas fa-star"></i>
-                                <span>4.7</span>
-                            </div>
-                            <span class="category temple">Temple</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Se Cathedral -->
-                <div class="attraction-card">
-                    <img src="images/se-cathedral.jpg" alt="Se Cathedral">
-                    <div class="card-content">
-                        <h3>Se Cathedral</h3>
-                        <div class="location">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>Old Goa</span>
-                        </div>
-                        <p>One of Asia's largest churches with Portuguese-Gothic architecture.</p>
-                        <div class="card-footer">
-                            <div class="rating">
-                                <i class="fas fa-star"></i>
-                                <span>4.7</span>
-                            </div>
-                            <span class="category church">Church</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Chapora Fort -->
-                <div class="attraction-card">
-                    <img src="images/chapora-fort.jpg" alt="Chapora Fort">
-                    <div class="card-content">
-                        <h3>Chapora Fort</h3>
-                        <div class="location">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>Chapora</span>
-                        </div>
-                        <p>Scenic hilltop fort offering panoramic views of Vagator beach.</p>
-                        <div class="card-footer">
-                            <div class="rating">
-                                <i class="fas fa-star"></i>
-                                <span>4.5</span>
-                            </div>
-                            <span class="category fort">Fort</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Ancestral Goa -->
-                <div class="attraction-card">
-                    <img src="images/ancestral-goa.jpg" alt="Ancestral Goa">
-                    <div class="card-content">
-                        <h3>Ancestral Goa</h3>
-                        <div class="location">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>Loutolim</span>
-                        </div>
-                        <p>Open-air museum showcasing traditional Goan rural life and culture.</p>
-                        <div class="card-footer">
-                            <div class="rating">
-                                <i class="fas fa-star"></i>
-                                <span>4.4</span>
-                            </div>
-                            <span class="category museum">Museum</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Dudhsagar Waterfalls -->
-                <div class="attraction-card">
-                    <img src="images/dudhsagar-waterfalls.jpg" alt="Dudhsagar Waterfalls">
-                    <div class="card-content">
-                        <h3>Dudhsagar Waterfalls</h3>
-                        <div class="location">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>Mollem</span>
-                        </div>
-                        <p>Majestic four-tiered waterfall cascading from 310 meters height.</p>
-                        <div class="card-footer">
-                            <div class="rating">
-                                <i class="fas fa-star"></i>
-                                <span>4.9</span>
-                            </div>
-                            <span class="category nature">Nature</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Church of Our Lady -->
-                <div class="attraction-card">
-                    <img src="images/church-our-lady.jpg" alt="Church of Our Lady">
-                    <div class="card-content">
-                        <h3>Church of Our Lady</h3>
-                        <div class="location">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>Panaji</span>
-                        </div>
-                        <p>Historic church with baroque architecture in the heart of Panaji.</p>
-                        <div class="card-footer">
-                            <div class="rating">
-                                <i class="fas fa-star"></i>
-                                <span>4.6</span>
-                            </div>
-                            <span class="category church">Church</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Reis Magos Fort -->
-                <div class="attraction-card">
-                    <img src="images/reis-magos-fort.jpg" alt="Reis Magos Fort">
-                    <div class="card-content">
-                        <h3>Reis Magos Fort</h3>
-                        <div class="location">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>Reis Magos</span>
-                        </div>
-                        <p>Restored fort offering cultural exhibitions and river views.</p>
-                        <div class="card-footer">
-                            <div class="rating">
-                                <i class="fas fa-star"></i>
-                                <span>4.5</span>
-                            </div>
-                            <span class="category fort">Fort</span>
-                        </div>
+                    
+                    <!-- Filter Tabs -->
+                    <div class="filter-tabs" role="tablist" aria-label="Filter attractions by category">
+                        <button class="filter-tab active" 
+                                role="tab" 
+                                aria-selected="true"
+                                aria-controls="attractions-grid"
+                                data-filter="all">
+                            All
+                        </button>
+                        <button class="filter-tab" 
+                                role="tab" 
+                                aria-selected="false"
+                                aria-controls="attractions-grid"
+                                data-filter="church">
+                            Churches
+                        </button>
+                        <button class="filter-tab" 
+                                role="tab" 
+                                aria-selected="false"
+                                aria-controls="attractions-grid"
+                                data-filter="temple">
+                            Temples
+                        </button>
+                        <button class="filter-tab" 
+                                role="tab" 
+                                aria-selected="false"
+                                aria-controls="attractions-grid"
+                                data-filter="fort">
+                            Forts
+                        </button>
+                        <button class="filter-tab" 
+                                role="tab" 
+                                aria-selected="false"
+                                aria-controls="attractions-grid"
+                                data-filter="museum">
+                            Museums
+                        </button>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <div class="load-more">
-                <button class="load-more-btn">Load More</button>
+        <!-- Attractions Grid -->
+        <section class="attractions-section" aria-labelledby="attractions-heading">
+            <div class="container">
+                <h2 id="attractions-heading" class="sr-only">List of attractions</h2>
+                
+                <div class="attractions-grid" id="attractions-grid" role="list">
+                    <!-- Attraction Card 1 - Basilica of Bom Jesus -->
+                    <article class="attraction-card hreview" data-category="church" role="listitem">
+                        <div class="card-image-wrapper">
+                            <img src="pictures/Church.png" 
+                                 alt="Basilica of Bom Jesus white facade and architectural details" 
+                                 class="card-image"
+                                 loading="lazy"
+                                 width="400"
+                                 height="300">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title item">
+                                <span class="fn">Basilica of Bom Jesus</span>
+                            </h3>
+                            <div class="card-location geo">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                                <span>Old Goa</span>
+                                <meta class="latitude" content="15.5007">
+                                <meta class="longitude" content="73.9114">
+                            </div>
+                            <p class="card-description summary">
+                                UNESCO World Heritage Site housing St. Francis Xavier's mortal remains.
+                            </p>
+                            <div class="card-footer">
+                                <div class="rating" aria-label="Rating: 4.8 out of 5">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                                    </svg>
+                                    <span class="value">4.8</span>
+                                </div>
+                                <span class="category-badge church">Church</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Attraction Card 2 - Aguada Fort -->
+                    <article class="attraction-card hreview" data-category="fort" role="listitem">
+                        <div class="card-image-wrapper">
+                            <img src="pictures/Fort.png" 
+                                 alt="Aguada Fort stone walls with ocean view" 
+                                 class="card-image"
+                                 loading="lazy"
+                                 width="400"
+                                 height="300">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title item">
+                                <span class="fn">Aguada Fort</span>
+                            </h3>
+                            <div class="card-location">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                                <span>Candolim</span>
+                            </div>
+                            <p class="card-description summary">
+                                17th-century Portuguese fort with lighthouse and stunning sea views.
+                            </p>
+                            <div class="card-footer">
+                                <div class="rating" aria-label="Rating: 4.6 out of 5">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                                    </svg>
+                                    <span class="value">4.6</span>
+                                </div>
+                                <span class="category-badge fort">Fort</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Attraction Card 3 - Shri Mangeshi Temple -->
+                    <article class="attraction-card hreview" data-category="temple" role="listitem">
+                        <div class="card-image-wrapper">
+                            <img src="pictures/Temple.png" 
+                                 alt="Shri Mangeshi Temple with traditional Hindu architecture" 
+                                 class="card-image"
+                                 loading="lazy"
+                                 width="400"
+                                 height="300">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title item">
+                                <span class="fn">Shri Mangeshi Temple</span>
+                            </h3>
+                            <div class="card-location">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                                <span>Ponda</span>
+                            </div>
+                            <p class="card-description summary">
+                                Ancient Hindu temple dedicated to Lord Shiva with beautiful architecture.
+                            </p>
+                            <div class="card-footer">
+                                <div class="rating" aria-label="Rating: 4.7 out of 5">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                                    </svg>
+                                    <span class="value">4.7</span>
+                                </div>
+                                <span class="category-badge temple">Temple</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Attraction Card 4 - Se Cathedral -->
+                    <article class="attraction-card hreview" data-category="church" role="listitem">
+                        <div class="card-image-wrapper">
+                            <img src="pictures/Ancestral.png" 
+                                 alt="Se Cathedral with Portuguese-Gothic architecture" 
+                                 class="card-image"
+                                 loading="lazy"
+                                 width="400"
+                                 height="300">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title item">
+                                <span class="fn">Se Cathedral</span>
+                            </h3>
+                            <div class="card-location">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                                <span>Old Goa</span>
+                            </div>
+                            <p class="card-description summary">
+                                One of Asia's largest churches with Portuguese-Gothic architecture.
+                            </p>
+                            <div class="card-footer">
+                                <div class="rating" aria-label="Rating: 4.7 out of 5">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                                    </svg>
+                                    <span class="value">4.7</span>
+                                </div>
+                                <span class="category-badge church">Church</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Attraction Card 5 - Chapora Fort -->
+                    <article class="attraction-card hreview" data-category="fort" role="listitem">
+                        <div class="card-image-wrapper">
+                            <img src="pictures/Fort.png" 
+                                 alt="Chapora Fort hilltop ruins with coastal panorama" 
+                                 class="card-image"
+                                 loading="lazy"
+                                 width="400"
+                                 height="300">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title item">
+                                <span class="fn">Chapora Fort</span>
+                            </h3>
+                            <div class="card-location">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                                <span>Chapora</span>
+                            </div>
+                            <p class="card-description summary">
+                                Scenic hilltop fort offering panoramic views of Vagator beach.
+                            </p>
+                            <div class="card-footer">
+                                <div class="rating" aria-label="Rating: 4.5 out of 5">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                                    </svg>
+                                    <span class="value">4.5</span>
+                                </div>
+                                <span class="category-badge fort">Fort</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Attraction Card 6 - Ancestral Goa -->
+                    <article class="attraction-card hreview" data-category="museum" role="listitem">
+                        <div class="card-image-wrapper">
+                            <img src="pictures/Ancestral.png" 
+                                 alt="Ancestral Goa museum showcasing traditional rural life" 
+                                 class="card-image"
+                                 loading="lazy"
+                                 width="400"
+                                 height="300">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title item">
+                                <span class="fn">Ancestral Goa</span>
+                            </h3>
+                            <div class="card-location">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                                <span>Loutolim</span>
+                            </div>
+                            <p class="card-description summary">
+                                Open-air museum showcasing traditional Goan rural life and culture.
+                            </p>
+                            <div class="card-footer">
+                                <div class="rating" aria-label="Rating: 4.4 out of 5">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                                    </svg>
+                                    <span class="value">4.4</span>
+                                </div>
+                                <span class="category-badge museum">Museum</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Attraction Card 7 - Dudhsagar Waterfalls -->
+                    <article class="attraction-card hreview" data-category="nature" role="listitem">
+                        <div class="card-image-wrapper">
+                            <img src="pictures/Waterfalls.png" 
+                                 alt="Dudhsagar Waterfalls cascading through lush forest" 
+                                 class="card-image"
+                                 loading="lazy"
+                                 width="400"
+                                 height="300">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title item">
+                                <span class="fn">Dudhsagar Waterfalls</span>
+                            </h3>
+                            <div class="card-location">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                                <span>Mollem</span>
+                            </div>
+                            <p class="card-description summary">
+                                Majestic four-tiered waterfall cascading from 310 meters height.
+                            </p>
+                            <div class="card-footer">
+                                <div class="rating" aria-label="Rating: 4.9 out of 5">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                                    </svg>
+                                    <span class="value">4.9</span>
+                                </div>
+                                <span class="category-badge nature">Nature</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Attraction Card 8 - Church of Our Lady -->
+                    <article class="attraction-card hreview" data-category="church" role="listitem">
+                        <div class="card-image-wrapper">
+                            <img src="pictures/Church.png" 
+                                 alt="Church of Our Lady with baroque architecture" 
+                                 class="card-image"
+                                 loading="lazy"
+                                 width="400"
+                                 height="300">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title item">
+                                <span class="fn">Church of Our Lady</span>
+                            </h3>
+                            <div class="card-location">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                                <span>Panaji</span>
+                            </div>
+                            <p class="card-description summary">
+                                Historic church with baroque architecture in the heart of Panaji.
+                            </p>
+                            <div class="card-footer">
+                                <div class="rating" aria-label="Rating: 4.6 out of 5">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                                    </svg>
+                                    <span class="value">4.6</span>
+                                </div>
+                                <span class="category-badge church">Church</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Attraction Card 9 - Reis Magos Fort -->
+                    <article class="attraction-card hreview" data-category="fort" role="listitem">
+                        <div class="card-image-wrapper">
+                            <img src="pictures/Fort.png" 
+                                 alt="Reis Magos Fort overlooking the river" 
+                                 class="card-image"
+                                 loading="lazy"
+                                 width="400"
+                                 height="300">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title item">
+                                <span class="fn">Reis Magos Fort</span>
+                            </h3>
+                            <div class="card-location">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                                <span>Reis Magos</span>
+                            </div>
+                            <p class="card-description summary">
+                                Restored fort offering cultural exhibitions and river views.
+                            </p>
+                            <div class="card-footer">
+                                <div class="rating" aria-label="Rating: 4.5 out of 5">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                                    </svg>
+                                    <span class="value">4.5</span>
+                                </div>
+                                <span class="category-badge fort">Fort</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Load More Button -->
+                <div class="load-more-wrapper">
+                    <button class="load-more-btn" id="load-more-btn" aria-label="Load more attractions">
+                        Load More
+                    </button>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="footer" role="contentinfo">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h4>About</h4>
-                    <ul>
-                        <li><a href="#">About Goa</a></li>
-                        <li><a href="#">History</a></li>
+                    <h3 class="footer-heading">About</h3>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Goa</a></li>
+                        <li><a href="about.html#history">History</a></li>
                     </ul>
                 </div>
+
                 <div class="footer-section">
-                    <h4>Explore</h4>
-                    <ul>
-                        <li><a href="#">Attractions</a></li>
-                        <li><a href="#">Beaches</a></li>
+                    <h3 class="footer-heading">Explore</h3>
+                    <ul class="footer-links">
+                        <li><a href="attractions.html">Attractions</a></li>
+                        <li><a href="beaches.html">Beaches</a></li>
                     </ul>
                 </div>
+
                 <div class="footer-section">
-                    <h4>Travel Info</h4>
-                    <ul>
-                        <li><a href="#">Getting Here</a></li>
-                        <li><a href="#">Accommodation</a></li>
+                    <h3 class="footer-heading">Travel Info</h3>
+                    <ul class="footer-links">
+                        <li><a href="plan-trip.html#getting-here">Getting Here</a></li>
+                        <li><a href="plan-trip.html#accommodation">Accommodation</a></li>
                     </ul>
                 </div>
+
                 <div class="footer-section">
-                    <h4>Connect</h4>
-                    <ul>
-                        <li><a href="#">Facebook</a></li>
-                        <li><a href="#">Instagram</a></li>
+                    <h3 class="footer-heading">Connect</h3>
+                    <ul class="footer-links">
+                        <li><a href="#" aria-label="Facebook">Facebook</a></li>
+                        <li><a href="#" aria-label="Instagram">Instagram</a></li>
                     </ul>
                 </div>
             </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 Visit Goa Student Project. Educational Use Only.</p>
+            </div>
         </div>
     </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" 
+            class="back-to-top" 
+            aria-label="Back to top"
+            title="Back to top">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </button>
+
+    <script src="main.js" defer></script>
 </body>
 </html>
