@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore Goa's rich cultural heritage - a harmonious blend of East and West. Discover Portuguese colonial influence, Hindu kingdoms, festivals, cuisine, and traditional arts.">
+    <meta name="keywords" content="Goa culture, Goan heritage, Portuguese colonial, Hindu kingdoms, Goan festivals, Goan cuisine, traditional arts">
+    <meta name="author" content="Student Project Team">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Culture & Heritage - Visit Goa">
+    <meta property="og:description" content="Explore the rich tapestry of Goan culture - a harmonious blend of East and West">
+    <meta property="og:image" content="images/culture-og.jpg">
+    
+    <!-- Preload fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <title>Culture & Heritage - Visit Goa</title>
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Structured Data - hCalendar for festivals -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TouristDestination",
+      "name": "Goa Culture & Heritage",
+      "description": "Rich cultural blend of East and West with Portuguese colonial influence and ancient Hindu traditions",
+      "touristType": "Culture enthusiasts, history buffs, food lovers"
+    }
+    </script>
+</head>
+<body>
+    <!-- Educational Notice Banner -->
+    <div class="edu-notice" role="banner" aria-label="Educational notice">
+        <div class="container">
+            <p>
+                <strong>📚 Educational Project:</strong> This website is created by students for educational purposes only.
+            </p>
+        </div>
+    </div>
+
+    <!-- Skip to main content -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Header Navigation -->
+    <header class="header" role="banner">
+        <nav class="navbar container" role="navigation" aria-label="Main navigation">
+            <div class="nav-brand">
+                <img src="images/goa-logo.png" alt="Visit Goa Logo" class="logo" width="24" height="24">
+                <span class="brand-text">Visit Goa</span>
+            </div>
+            
+            <button class="menu-toggle" 
+                    aria-label="Toggle navigation menu" 
+                    aria-expanded="false" 
+                    aria-controls="nav-menu">
+                <span class="hamburger-icon" aria-hidden="true"></span>
+            </button>
+            
+            <ul class="nav-menu" id="nav-menu" role="menubar">
+                <li role="none"><a href="index.html" role="menuitem">Home</a></li>
+                <li role="none"><a href="attractions.html" role="menuitem">Attractions</a></li>
+                <li role="none"><a href="beaches.html" role="menuitem">Beaches</a></li>
+                <li role="none"><a href="culture.html" role="menuitem" aria-current="page">Culture</a></li>
+                <li role="none"><a href="plan-trip.html" role="menuitem">Plan Trip</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Hero/Intro Section -->
+        <section class="culture-intro" aria-labelledby="intro-heading">
+            <div class="container">
+                <h1 id="intro-heading" class="intro-title">Culture & Heritage</h1>
+                <p class="intro-description">
+                    Explore the rich tapestry of Goan culture - a harmonious blend of East and West, where ancient traditions 
+                    meet colonial influences to create a unique cultural identity.
+                </p>
+            </div>
+        </section>
+
+        <!-- Historical Journey Timeline -->
+        <section class="historical-journey" aria-labelledby="history-heading">
+            <div class="container">
+                <h2 id="history-heading" class="section-title">Historical Journey</h2>
+                
+                <div class="timeline">
+                    <!-- Timeline Item 1 - Portuguese Colonial Era -->
+                    <article class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-image-wrapper">
+                                <img src="images/portuguese-colonial.jpg" 
+                                     alt="Colorful Portuguese colonial buildings in Goa" 
+                                     class="timeline-image"
+                                     loading="lazy"
+                                     width="500"
+                                     height="350">
+                            </div>
+                            <div class="timeline-text">
+                                <span class="timeline-period">1510 - 1961</span>
+                                <h3 class="timeline-heading">Portuguese Colonial Era</h3>
+                                <p class="timeline-description">
+                                    Over 450 years of Portuguese rule left an indelible mark on Goa's architecture, cuisine, language, and traditions, creating a unique Indo-Portuguese cultural blend.
+                                </p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Timeline Item 2 - Ancient Hindu Kingdoms -->
+                    <article class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-image-wrapper">
+                                <img src="images/ancient-temple.jpg" 
+                                     alt="Ancient Hindu temple ruins with stone architecture" 
+                                     class="timeline-image"
+                                     loading="lazy"
+                                     width="500"
+                                     height="350">
+                            </div>
+                            <div class="timeline-text">
+                                <span class="timeline-period">3rd Century BCE</span>
+                                <h3 class="timeline-heading">Ancient Hindu Kingdoms</h3>
+                                <p class="timeline-description">
+                                    Goa was ruled by various Hindu dynasties including the Mauryas, Satavahanas, and Kadambas, who built magnificent temples and established trade networks.
+                                </p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Timeline Item 3 - Modern Goa -->
+                    <article class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-image-wrapper">
+                                <img src="images/modern-goa.jpg" 
+                                     alt="Modern Goa beach scene at sunset" 
+                                     class="timeline-image"
+                                     loading="lazy"
+                                     width="500"
+                                     height="350">
+                            </div>
+                            <div class="timeline-text">
+                                <span class="timeline-period">1961 - Present</span>
+                                <h3 class="timeline-heading">Modern Goa</h3>
+                                <p class="timeline-description">
+                                    After liberation, Goa evolved into India's tourism capital while preserving its multicultural heritage, becoming a symbol of harmony between tradition and modernity.
+                                </p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Timeline Item 4 - Islamic Influence -->
+                    <article class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-image-wrapper">
+                                <img src="images/islamic-fort.jpg" 
+                                     alt="Islamic architectural elements in Goan fort" 
+                                     class="timeline-image"
+                                     loading="lazy"
+                                     width="500"
+                                     height="350">
+                            </div>
+                            <div class="timeline-text">
+                                <span class="timeline-period">14th Century</span>
+                                <h3 class="timeline-heading">Islamic Influence</h3>
+                                <p class="timeline-description">
+                                    The Bahmani Sultanate and later the Adil Shahis brought Islamic architectural elements and cultural practices that enriched Goa's diverse heritage.
+                                </p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cultural Highlights Section -->
+        <section class="cultural-highlights" aria-labelledby="highlights-heading">
+            <div class="container">
+                <h2 id="highlights-heading" class="section-title">Cultural Highlights</h2>
+                
+                <div class="highlights-grid">
+                    <!-- Highlight 1 - Music & Dance -->
+                    <article class="highlight-card vevent">
+                        <div class="highlight-image-wrapper">
+                            <img src="images/music-dance.jpg" 
+                                 alt="Traditional Goan music and dance performance with colorful costumes" 
+                                 class="highlight-image"
+                                 loading="lazy"
+                                 width="400"
+                                 height="300">
+                        </div>
+                        <div class="highlight-content">
+                            <h3 class="highlight-title summary">Music & Dance</h3>
+                            <p class="highlight-description">
+                                From traditional Dekhni and Fugdi to modern trance music festivals.
+                            </p>
+                            <a href="#music-dance" class="explore-link">
+                                Explore More →
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Highlight 2 - Festivals (hCalendar) -->
+                    <article class="highlight-card vevent">
+                        <div class="highlight-image-wrapper">
+                            <img src="images/goa-festivals.jpg" 
+                                 alt="Vibrant Goan festival celebration with sunset backdrop" 
+                                 class="highlight-image"
+                                 loading="lazy"
+                                 width="400"
+                                 height="300">
+                        </div>
+                        <div class="highlight-content">
+                            <h3 class="highlight-title summary">Festivals</h3>
+                            <p class="highlight-description description">
+                                Carnival, Shigmo, Christmas, and Diwali celebrated with equal fervor.
+                            </p>
+                            <a href="#festivals" class="explore-link">
+                                Explore More →
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Highlight 3 - Cuisine -->
+                    <article class="highlight-card hproduct">
+                        <div class="highlight-image-wrapper">
+                            <img src="images/goan-cuisine-spread.jpg" 
+                                 alt="Traditional Goan dishes with spices and coastal flavors" 
+                                 class="highlight-image"
+                                 loading="lazy"
+                                 width="400"
+                                 height="300">
+                        </div>
+                        <div class="highlight-content">
+                            <h3 class="highlight-title fn">Cuisine</h3>
+                            <p class="highlight-description description">
+                                Unique blend of Portuguese, Konkani, and coastal flavors.
+                            </p>
+                            <a href="#cuisine" class="explore-link">
+                                Explore More →
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Highlight 4 - Art & Crafts -->
+                    <article class="highlight-card">
+                        <div class="highlight-image-wrapper">
+                            <img src="images/art-crafts.jpg" 
+                                 alt="Traditional Goan pottery and handicrafts" 
+                                 class="highlight-image"
+                                 loading="lazy"
+                                 width="400"
+                                 height="300">
+                        </div>
+                        <div class="highlight-content">
+                            <h3 class="highlight-title">Art & Crafts</h3>
+                            <p class="highlight-description">
+                                Traditional pottery, shell craft, and azulejos tile work.
+                            </p>
+                            <a href="#art-crafts" class="explore-link">
+                                Explore More →
+                            </a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Heritage Sites Section -->
+        <section class="heritage-sites" aria-labelledby="heritage-heading">
+            <div class="container">
+                <h2 id="heritage-heading" class="section-title">Heritage Sites</h2>
+                
+                <div class="heritage-grid">
+                    <!-- Heritage Site 1 -->
+                    <article class="heritage-card">
+                        <div class="heritage-image-wrapper">
+                            <img src="images/old-goa.jpg" 
+                                 alt="Historic Old Goa churches and monuments" 
+                                 class="heritage-image"
+                                 loading="lazy"
+                                 width="400"
+                                 height="300">
+                        </div>
+                        <div class="heritage-overlay">
+                            <h3 class="heritage-name">Old Goa</h3>
+                            <p class="heritage-subtitle">UNESCO World Heritage Site</p>
+                        </div>
+                    </article>
+
+                    <!-- Heritage Site 2 -->
+                    <article class="heritage-card">
+                        <div class="heritage-image-wrapper">
+                            <img src="images/fontainhas.jpg" 
+                                 alt="Colorful Fontainhas Latin Quarter buildings" 
+                                 class="heritage-image"
+                                 loading="lazy"
+                                 width="400"
+                                 height="300">
+                        </div>
+                        <div class="heritage-overlay">
+                            <h3 class="heritage-name">Fontainhas</h3>
+                            <p class="heritage-subtitle">Latin Quarter</p>
+                        </div>
+                    </article>
+
+                    <!-- Heritage Site 3 -->
+                    <article class="heritage-card">
+                        <div class="heritage-image-wrapper">
+                            <img src="images/temple-heritage.jpg" 
+                                 alt="Ancient Goan temple with traditional architecture" 
+                                 class="heritage-image"
+                                 loading="lazy"
+                                 width="400"
+                                 height="300">
+                        </div>
+                        <div class="heritage-overlay">
+                            <h3 class="heritage-name">Ancient Temples</h3>
+                            <p class="heritage-subtitle">Hindu Heritage</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-heading">About</h3>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Goa</a></li>
+                        <li><a href="about.html#history">History</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3 class="footer-heading">Explore</h3>
+                    <ul class="footer-links">
+                        <li><a href="attractions.html">Attractions</a></li>
+                        <li><a href="beaches.html">Beaches</a></li>
+                        <li><a href="culture.html">Culture</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3 class="footer-heading">Travel Info</h3>
+                    <ul class="footer-links">
+                        <li><a href="plan-trip.html#getting-here">Getting Here</a></li>
+                        <li><a href="plan-trip.html#accommodation">Accommodation</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3 class="footer-heading">Connect</h3>
+                    <ul class="footer-links">
+                        <li><a href="#" aria-label="Facebook">Facebook</a></li>
+                        <li><a href="#" aria-label="Instagram">Instagram</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 Visit Goa Student Project. Educational Use Only.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" 
+            class="back-to-top" 
+            aria-label="Back to top"
+            title="Back to top">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </button>
+
+    <script src="main.js" defer></script>
+</body>
+</html>

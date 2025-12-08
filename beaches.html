@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Discover Goa's stunning beaches - from popular Baga Beach to serene Palolem. Over 100 km of golden coastline with water sports, nightlife, and peaceful retreats.">
+    <meta name="keywords" content="Goa beaches, Baga Beach, Palolem Beach, Anjuna Beach, beach activities, water sports Goa">
+    <meta name="author" content="Student Project Team">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Goa's Stunning Beaches - Visit Goa">
+    <meta property="og:description" content="Over 100 km of golden coastline waiting to be explored">
+    <meta property="og:image" content="images/beaches-og.jpg">
+    
+    <!-- Preload fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <title>Goa's Stunning Beaches - Visit Goa</title>
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TouristDestination",
+      "name": "Goa Beaches",
+      "description": "Over 100 km of golden coastline featuring pristine beaches, water sports, and vibrant beach culture",
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "15.2993",
+        "longitude": "73.8278"
+      }
+    }
+    </script>
+</head>
+<body>
+    <!-- Educational Notice Banner -->
+    <div class="edu-notice" role="banner" aria-label="Educational notice">
+        <div class="container">
+            <p>
+                <strong>📚 Educational Project:</strong> This website is created by students for educational purposes only.
+            </p>
+        </div>
+    </div>
+
+    <!-- Skip to main content -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Header Navigation -->
+    <header class="header" role="banner">
+        <nav class="navbar container" role="navigation" aria-label="Main navigation">
+            <div class="nav-brand">
+                <img src="images/goa-logo.png" alt="Visit Goa Logo" class="logo" width="24" height="24">
+                <span class="brand-text">Visit Goa</span>
+            </div>
+            
+            <button class="menu-toggle" 
+                    aria-label="Toggle navigation menu" 
+                    aria-expanded="false" 
+                    aria-controls="nav-menu">
+                <span class="hamburger-icon" aria-hidden="true"></span>
+            </button>
+            
+            <ul class="nav-menu" id="nav-menu" role="menubar">
+                <li role="none"><a href="index.html" role="menuitem">Home</a></li>
+                <li role="none"><a href="attractions.html" role="menuitem">Attractions</a></li>
+                <li role="none"><a href="beaches.html" role="menuitem" aria-current="page">Beaches</a></li>
+                <li role="none"><a href="culture.html" role="menuitem">Culture</a></li>
+                <li role="none"><a href="plan-trip.html" role="menuitem">Plan Trip</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Hero Section with Background Image -->
+        <section class="beaches-hero" aria-labelledby="hero-heading">
+            <div class="hero-overlay"></div>
+            <div class="container hero-content">
+                <h1 id="hero-heading" class="hero-title">Goa's Stunning Beaches</h1>
+                <p class="hero-subtitle">
+                    Over 100 km of golden coastline waiting to be explored
+                </p>
+            </div>
+        </section>
+
+        <!-- Browse by Region Section -->
+        <section class="region-browse" aria-labelledby="region-heading">
+            <div class="container">
+                <h2 id="region-heading" class="section-title">Browse by Region</h2>
+                
+                <div class="region-grid">
+                    <!-- North Goa -->
+                    <article class="region-card" data-region="north">
+                        <div class="region-icon" aria-hidden="true">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 6s1.5-2 5-2 5 2 5 2 1.5-2 5-2 5 2 5 2v14s-1.5-2-5-2-5 2-5 2-1.5-2-5-2-5 2-5 2V6z"/>
+                            </svg>
+                        </div>
+                        <h3 class="region-name">North Goa</h3>
+                    </article>
+
+                    <!-- South Goa -->
+                    <article class="region-card" data-region="south">
+                        <div class="region-icon" aria-hidden="true">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                                <path d="M2 17l10 5 10-5"/>
+                                <path d="M2 12l10 5 10-5"/>
+                            </svg>
+                        </div>
+                        <h3 class="region-name">South Goa</h3>
+                    </article>
+
+                    <!-- Popular -->
+                    <article class="region-card" data-region="popular">
+                        <div class="region-icon" aria-hidden="true">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="5"/>
+                                <line x1="12" y1="1" x2="12" y2="3"/>
+                                <line x1="12" y1="21" x2="12" y2="23"/>
+                                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                                <line x1="1" y1="12" x2="3" y2="12"/>
+                                <line x1="21" y1="12" x2="23" y2="12"/>
+                                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                            </svg>
+                        </div>
+                        <h3 class="region-name">Popular</h3>
+                    </article>
+
+                    <!-- Hidden Gems -->
+                    <article class="region-card" data-region="hidden">
+                        <div class="region-icon" aria-hidden="true">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                <circle cx="12" cy="10" r="3"/>
+                            </svg>
+                        </div>
+                        <h3 class="region-name">Hidden Gems</h3>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Beaches Section -->
+        <section class="featured-beaches" aria-labelledby="featured-heading">
+            <div class="container">
+                <h2 id="featured-heading" class="section-title">Featured Beaches</h2>
+                
+                <div class="beaches-list">
+                    <!-- Beach 1 - Baga Beach -->
+                    <article class="beach-card hreview" data-region="north">
+                        <div class="beach-image-wrapper">
+                            <img src="images/baga-beach.jpg" 
+                                 alt="Sunset at Baga Beach with lifeguard tower and motorcycle" 
+                                 class="beach-image"
+                                 loading="lazy"
+                                 width="600"
+                                 height="400">
+                        </div>
+                        <div class="beach-content">
+                            <h3 class="beach-name item">
+                                <span class="fn">Baga Beach</span>
+                            </h3>
+                            <div class="beach-location geo">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                                <span>North Goa</span>
+                                <meta class="latitude" content="15.5559">
+                                <meta class="longitude" content="73.7516">
+                            </div>
+                            <div class="beach-tags">
+                                <span class="tag tag-blue">Water Sports</span>
+                                <span class="tag tag-purple">Nightlife</span>
+                            </div>
+                            <p class="beach-description summary">
+                                One of Goa's most popular beaches known for water sports, vibrant nightlife, and beachside shacks. Perfect for adventure seekers and party enthusiasts.
+                            </p>
+                            <div class="beach-activities">
+                                <div class="activity">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M5 5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5z"/>
+                                    </svg>
+                                    <span>Parasailing</span>
+                                </div>
+                                <div class="activity">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                                    </svg>
+                                    <span>Jet Skiing</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Beach 2 - Palolem Beach -->
+                    <article class="beach-card hreview" data-region="south">
+                        <div class="beach-image-wrapper">
+                            <img src="images/palolem-beach.jpg" 
+                                 alt="Palolem Beach with palm trees and blue waters" 
+                                 class="beach-image"
+                                 loading="lazy"
+                                 width="600"
+                                 height="400">
+                        </div>
+                        <div class="beach-content">
+                            <h3 class="beach-name item">
+                                <span class="fn">Palolem Beach</span>
+                            </h3>
+                            <div class="beach-location geo">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                                <span>South Goa</span>
+                                <meta class="latitude" content="15.0099">
+                                <meta class="longitude" content="74.0233">
+                            </div>
+                            <div class="beach-tags">
+                                <span class="tag tag-blue">Peaceful</span>
+                                <span class="tag tag-green">Family-Friendly</span>
+                            </div>
+                            <p class="beach-description summary">
+                                Crescent-shaped paradise with calm waters, palm-fringed shores, and a relaxed atmosphere. Ideal for families and those seeking peaceful relaxation.
+                            </p>
+                            <div class="beach-activities">
+                                <div class="activity">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <circle cx="12" cy="12" r="10"/>
+                                    </svg>
+                                    <span>Swimming</span>
+                                </div>
+                                <div class="activity">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                                    </svg>
+                                    <span>Kayaking</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Beach 3 - Anjuna Beach -->
+                    <article class="beach-card hreview" data-region="north">
+                        <div class="beach-image-wrapper">
+                            <img src="images/anjuna-beach.jpg" 
+                                 alt="Anjuna Beach dramatic sunset with red cliffs" 
+                                 class="beach-image"
+                                 loading="lazy"
+                                 width="600"
+                                 height="400">
+                        </div>
+                        <div class="beach-content">
+                            <h3 class="beach-name item">
+                                <span class="fn">Anjuna Beach</span>
+                            </h3>
+                            <div class="beach-location geo">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                                <span>North Goa</span>
+                                <meta class="latitude" content="15.5736">
+                                <meta class="longitude" content="73.7401">
+                            </div>
+                            <div class="beach-tags">
+                                <span class="tag tag-blue">Markets</span>
+                                <span class="tag tag-purple">Scenic</span>
+                            </div>
+                            <p class="beach-description summary">
+                                Famous for its dramatic red cliffs, flea markets, and trance parties. A hub for backpackers and travelers seeking bohemian vibes.
+                            </p>
+                            <div class="beach-activities">
+                                <div class="activity">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                                    </svg>
+                                    <span>Shopping</span>
+                                </div>
+                                <div class="activity">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <rect x="2" y="3" width="20" height="14" rx="2"/>
+                                        <path d="M8 21h8"/>
+                                        <path d="M12 17v4"/>
+                                    </svg>
+                                    <span>Photography</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Beach Activities Section -->
+        <section class="activities-section" aria-labelledby="activities-heading">
+            <div class="container">
+                <h2 id="activities-heading" class="section-title">Beach Activities</h2>
+                
+                <div class="activities-grid">
+                    <!-- Activity 1 - Parasailing -->
+                    <article class="activity-card">
+                        <div class="activity-icon" aria-hidden="true">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                                <path d="M12 22v-10"/>
+                                <path d="M2 17l10-5 10 5"/>
+                            </svg>
+                        </div>
+                        <h3 class="activity-name">Parasailing</h3>
+                        <p class="activity-description">
+                            Experience thrilling parasailing adventures at Goa's best beaches.
+                        </p>
+                    </article>
+
+                    <!-- Activity 2 - Jet Skiing -->
+                    <article class="activity-card">
+                        <div class="activity-icon" aria-hidden="true">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 6s1.5-2 5-2 5 2 5 2 1.5-2 5-2 5 2 5 2v14s-1.5-2-5-2-5 2-5 2-1.5-2-5-2-5 2-5 2V6z"/>
+                            </svg>
+                        </div>
+                        <h3 class="activity-name">Jet Skiing</h3>
+                        <p class="activity-description">
+                            Experience thrilling jet skiing adventures at Goa's best beaches.
+                        </p>
+                    </article>
+
+                    <!-- Activity 3 - Scuba Diving -->
+                    <article class="activity-card">
+                        <div class="activity-icon" aria-hidden="true">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 6s1.5-2 5-2 5 2 5 2 1.5-2 5-2 5 2 5 2v14s-1.5-2-5-2-5 2-5 2-1.5-2-5-2-5 2-5 2V6z"/>
+                            </svg>
+                        </div>
+                        <h3 class="activity-name">Scuba Diving</h3>
+                        <p class="activity-description">
+                            Experience thrilling scuba diving adventures at Goa's best beaches.
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-heading">About</h3>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Goa</a></li>
+                        <li><a href="about.html#history">History</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3 class="footer-heading">Explore</h3>
+                    <ul class="footer-links">
+                        <li><a href="attractions.html">Attractions</a></li>
+                        <li><a href="beaches.html">Beaches</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3 class="footer-heading">Travel Info</h3>
+                    <ul class="footer-links">
+                        <li><a href="plan-trip.html#getting-here">Getting Here</a></li>
+                        <li><a href="plan-trip.html#accommodation">Accommodation</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3 class="footer-heading">Connect</h3>
+                    <ul class="footer-links">
+                        <li><a href="#" aria-label="Facebook">Facebook</a></li>
+                        <li><a href="#" aria-label="Instagram">Instagram</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 Visit Goa Student Project. Educational Use Only.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" 
+            class="back-to-top" 
+            aria-label="Back to top"
+            title="Back to top">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </button>
+
+    <script src="main.js" defer></script>
+</body>
+</html>
