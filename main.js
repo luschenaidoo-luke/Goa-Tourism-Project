@@ -260,7 +260,72 @@ const AttractionsPage = {
     init() {
         this.initSearch();
         this.initFilters();
+        this.applyURLFilter(); // Apply filter from URL if present
+        this.initLoadMore(); // Handle load more button
     },
+    applyURLFilter() {
+        // Get filter parameter from URL (e.g., ?filter=churches)
+        const urlParams = new URLSearchParams(window.location.search);
+        const filterCategory = urlParams.get('filter');
+        
+        if (filterCategory) {
+            // Find the button with matching category
+            const targetButton = document.querySelector(`.filter-tab[data-category="${filterCategory}"]`);
+            
+            if (targetButton) {
+                // Trigger click on the button to activate filter
+                targetButton.click();
+                
+                // Smooth scroll to attractions section after brief delay
+                setTimeout(() => {
+                    const attractionsSection = document.querySelector('.attractions-grid');
+                    if (attractionsSection) {
+                        const headerOffset = 100;
+                        const elementPosition = attractionsSection.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                        
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                }, 100);
+            }
+        }
+    },
+    
+    initLoadMore() {
+        const loadMoreBtn = document.getElementById('load-more-btn');
+        if (!loadMoreBtn) return;
+        
+        loadMoreBtn.addEventListener('click', () => {
+            // Hide the button
+            loadMoreBtn.style.display = 'none';
+            
+            // Create and show themed message
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'no-more-message';
+            messageDiv.innerHTML = `
+                <div class="message-icon">🏖️</div>
+                <h3 class="message-title">You've Seen It All!</h3>
+                <p class="message-text">
+                    We're currently updating our attractions database with more amazing places to visit in Goa. 
+                    Check back soon for new discoveries!
+                </p>
+                <div class="message-badge">Coming Soon</div>
+            `;
+            
+            // Insert message where button was
+            const wrapper = loadMoreBtn.parentElement;
+            wrapper.appendChild(messageDiv);
+            
+            // Smooth scroll to message
+            setTimeout(() => {
+                messageDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 100);
+        });
+    },
+
 
     initSearch() {
         const searchInput = document.getElementById('attraction-search');

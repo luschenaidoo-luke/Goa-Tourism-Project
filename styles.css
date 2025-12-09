@@ -3821,3 +3821,102 @@ body {
     outline: 2px solid var(--primary-orange);
     outline-offset: 2px;
 }
+
+/* ==========================================
+   LOAD MORE MESSAGE STYLES
+   Add this to your attractions-styles.css or styles.css
+   ========================================== */
+
+.no-more-message {
+    text-align: center;
+    padding: 3rem 2rem;
+    background: linear-gradient(135deg, #fff5e6 0%, #ffe8cc 100%);
+    border-radius: var(--radius-lg, 12px);
+    margin-top: 2rem;
+    box-shadow: 0 4px 20px rgba(237, 137, 54, 0.1);
+    border: 2px solid rgba(237, 137, 54, 0.2);
+    animation: fadeInUp 0.5s ease;
+}
+
+.message-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    animation: bounce 2s infinite;
+}
+
+.message-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #2c1810;
+    margin-bottom: 1rem;
+    font-family: 'Playfair Display', serif;
+}
+
+.message-text {
+    font-size: 1.125rem;
+    color: #5c3d2e;
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto 1.5rem;
+}
+
+.message-badge {
+    display: inline-block;
+    padding: 0.5rem 1.5rem;
+    background: linear-gradient(135deg, #ed8936 0%, #dd6b20 100%);
+    color: white;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.875rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    box-shadow: 0 2px 10px rgba(237, 137, 54, 0.3);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .no-more-message {
+        padding: 2rem 1.5rem;
+    }
+    
+    .message-icon {
+        font-size: 3rem;
+    }
+    
+    .message-title {
+        font-size: 1.5rem;
+    }
+    
+    .message-text {
+        font-size: 1rem;
+    }
+}
+
+/* Hide load more button when message is shown */
+.load-more-btn[style*="display: none"] + .no-more-message {
+    display: block;
+}
