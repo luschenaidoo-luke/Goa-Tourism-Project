@@ -82,7 +82,7 @@ const PageDetector = {
         if (filename.includes('attractions')) return 'attractions';
         if (filename.includes('beaches')) return 'beaches';
         if (filename.includes('culture')) return 'culture';
-        if (filename.includes('plan-trip')) return 'plan-trip';
+        if (filename.includes('plan')) return 'plan';
         if (filename.includes('team')) return 'team';
         return 'home';
     },
@@ -838,7 +838,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('Culture features loaded');
             break;
             
-        case 'plan-trip':
+        case 'plan':
             PlanTripPage.init();
             console.log('Plan Trip features loaded');
             break;
