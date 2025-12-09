@@ -1,678 +1,809 @@
 /**
- * VISIT GOA - MAIN JAVASCRIPT
+ * UNIFIED SITE.JS - Works on ALL Pages
+ * Detects which page is active and loads appropriate functionality
+ * Eliminates redundant code across multiple JS files
  * 
  * Features:
- * - Mobile navigation toggle
- * - Back to top button
- * - Smooth scrolling
- * - AJAX preparation for backend integration
- * - API integration structure
- * - Accessibility enhancements
- * - Performance optimizations
- * - Lazy loading images
+ * - Automatic page detection
+ * - Shared utilities (navigation, back-to-top, smooth scroll)
+ * - Page-specific features (search, filters, forms, animations)
+ * - Performance optimized
+ * - Fully accessible
  */
 
 // ==========================================
-// UTILITY FUNCTIONS
+// UTILITY FUNCTIONS (Used by all pages)
 // ==========================================
 
-/**
- * Debounce function to limit function calls
- * @param {Function} func - Function to debounce
- * @param {number} wait - Wait time in milliseconds
- * @returns {Function} Debounced function
- */
-function debounce(func, wait = 250) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
+const Utils = {
+    debounce(func, wait = 300) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
             clearTimeout(timeout);
-            func(...args);
+            timeout = setTimeout(later, wait);
         };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-}
-
-/**
- * Throttle function to limit function execution
- * @param {Function} func - Function to throttle
- * @param {number} limit - Time limit in milliseconds
- * @returns {Function} Throttled function
- */
-function throttle(func, limit = 250) {
-    let inThrottle;
-    return function(...args) {
-        if (!inThrottle) {
-            func.apply(this, args);
-            inThrottle = true;
-            setTimeout(() => inThrottle = false, limit);
-        }
-    };
-}
-
-/**
- * Check if element is in viewport
- * @param {HTMLElement} element - Element to check
- * @returns {boolean} True if element is in viewport
- */
-function isInViewport(element) {
-    const rect = element.getBoundingClientRect();
-    return (
-        rect.top >= 0 &&
-        rect.left >= 0 &&
-        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-    );
-}
-
-// ==========================================
-// API CONFIGURATION & HELPERS
-// ==========================================
-
-const API_CONFIG = {
-    baseURL: '/api', // Will be configured for actual backend
-    endpoints: {
-        attractions: '/attractions',
-        beaches: '/beaches',
-        events: '/events',
-        itinerary: '/itinerary',
-        weather: '/weather'
     },
-    timeout: 10000,
-    headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
+
+    throttle(func, limit = 250) {
+        let inThrottle;
+        return function(...args) {
+            if (!inThrottle) {
+                func.apply(this, args);
+                inThrottle = true;
+                setTimeout(() => inThrottle = false, limit);
+            }
+        };
+    },
+
+    showNotification(message, type = 'info') {
+        const notification = document.createElement('div');
+        notification.className = `notification notification-${type}`;
+        notification.setAttribute('role', 'alert');
+        notification.setAttribute('aria-live', 'polite');
+        notification.textContent = message;
+        notification.style.cssText = `
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 9999;
+            animation: slideIn 0.3s ease;
+            font-weight: 500;
+            max-width: 400px;
+            ${type === 'success' ? 'background: #28a745; color: white;' : ''}
+            ${type === 'error' ? 'background: #dc3545; color: white;' : ''}
+            ${type === 'info' ? 'background: #17a2b8; color: white;' : ''}
+        `;
+        
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.style.animation = 'slideOut 0.3s ease';
+            setTimeout(() => notification.remove(), 300);
+        }, 4000);
     }
 };
 
-/**
- * Generic AJAX request function
- * @param {string} url - Request URL
- * @param {Object} options - Fetch options
- * @returns {Promise} Promise resolving to response data
- */
-async function apiRequest(url, options = {}) {
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), API_CONFIG.timeout);
-    
-    try {
-        const response = await fetch(url, {
-            ...options,
-            signal: controller.signal,
-            headers: {
-                ...API_CONFIG.headers,
-                ...options.headers
+// ==========================================
+// PAGE DETECTOR
+// ==========================================
+
+const PageDetector = {
+    getCurrentPage() {
+        const path = window.location.pathname;
+        const filename = path.split('/').pop() || 'index.html';
+        
+        if (filename.includes('attractions')) return 'attractions';
+        if (filename.includes('beaches')) return 'beaches';
+        if (filename.includes('culture')) return 'culture';
+        if (filename.includes('plan-trip')) return 'plan-trip';
+        if (filename.includes('team')) return 'team';
+        return 'home';
+    },
+
+    isPage(pageName) {
+        return this.getCurrentPage() === pageName;
+    }
+};
+
+// ==========================================
+// SHARED FEATURES (All Pages)
+// ==========================================
+
+const SharedFeatures = {
+    // Mobile Navigation
+    initMobileNav() {
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        if (!menuToggle || !navMenu) return;
+        
+        menuToggle.addEventListener('click', () => {
+            const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+            
+            menuToggle.setAttribute('aria-expanded', !isExpanded);
+            navMenu.classList.toggle('active');
+            
+            if (!isExpanded) {
+                const firstLink = navMenu.querySelector('a');
+                if (firstLink) firstLink.focus();
             }
         });
         
-        clearTimeout(timeoutId);
-        
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        
-        const data = await response.json();
-        return { success: true, data };
-    } catch (error) {
-        clearTimeout(timeoutId);
-        
-        if (error.name === 'AbortError') {
-            console.error('Request timeout');
-            return { success: false, error: 'Request timeout' };
-        }
-        
-        console.error('API request failed:', error);
-        return { success: false, error: error.message };
-    }
-}
-
-/**
- * GET request helper
- * @param {string} endpoint - API endpoint
- * @returns {Promise} Promise resolving to response data
- */
-async function apiGet(endpoint) {
-    return apiRequest(`${API_CONFIG.baseURL}${endpoint}`, {
-        method: 'GET'
-    });
-}
-
-/**
- * POST request helper
- * @param {string} endpoint - API endpoint
- * @param {Object} data - Request body data
- * @returns {Promise} Promise resolving to response data
- */
-async function apiPost(endpoint, data) {
-    return apiRequest(`${API_CONFIG.baseURL}${endpoint}`, {
-        method: 'POST',
-        body: JSON.stringify(data)
-    });
-}
-
-// ==========================================
-// DATA LOADING & DYNAMIC CONTENT
-// ==========================================
-
-/**
- * Load team members (placeholder for API integration)
- */
-async function loadTeamMembers() {
-    const authorList = document.getElementById('author-list');
-    if (!authorList) return;
-    
-    // Placeholder team data - will be replaced with API call
-    const teamMembers = [
-        'Student Name 1',
-        'Student Name 2',
-        'Student Name 3',
-        'Student Name 4'
-    ];
-    
-    // In production, this would be:
-    // const result = await apiGet('/team-members');
-    // if (result.success) {
-    //     const teamMembers = result.data;
-    // }
-    
-    authorList.textContent = teamMembers.join(', ');
-}
-
-/**
- * Load attractions data (placeholder for API integration)
- */
-async function loadAttractions() {
-    const container = document.getElementById('attractionsContainer');
-    if (!container) return;
-    
-    // This is ready for API integration
-    // const result = await apiGet(API_CONFIG.endpoints.attractions);
-    // if (result.success) {
-    //     renderAttractions(result.data);
-    // }
-    
-    console.log('Ready for attractions API integration');
-}
-
-/**
- * Example: Submit trip planning form with AJAX
- * @param {FormData} formData - Form data to submit
- */
-async function submitTripPlan(formData) {
-    const data = Object.fromEntries(formData.entries());
-    
-    // Example AJAX submission
-    const result = await apiPost(API_CONFIG.endpoints.itinerary, data);
-    
-    if (result.success) {
-        console.log('Trip plan submitted successfully:', result.data);
-        showNotification('Trip plan created successfully!', 'success');
-        return result.data;
-    } else {
-        console.error('Failed to submit trip plan:', result.error);
-        showNotification('Failed to submit trip plan. Please try again.', 'error');
-        return null;
-    }
-}
-
-/**
- * Show notification to user
- * @param {string} message - Notification message
- * @param {string} type - Notification type (success, error, info)
- */
-function showNotification(message, type = 'info') {
-    // ARIA live region for accessibility
-    const notification = document.createElement('div');
-    notification.setAttribute('role', 'alert');
-    notification.setAttribute('aria-live', 'polite');
-    notification.className = `notification notification-${type}`;
-    notification.textContent = message;
-    
-    document.body.appendChild(notification);
-    
-    // Auto-remove after 5 seconds
-    setTimeout(() => {
-        notification.remove();
-    }, 5000);
-}
-
-// ==========================================
-// NAVIGATION
-// ==========================================
-
-/**
- * Initialize mobile navigation
- */
-function initMobileNav() {
-    const menuToggle = document.querySelector('.menu-toggle');
-    const navMenu = document.querySelector('.nav-menu');
-    
-    if (!menuToggle || !navMenu) return;
-    
-    menuToggle.addEventListener('click', () => {
-        const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
-        
-        menuToggle.setAttribute('aria-expanded', !isExpanded);
-        navMenu.classList.toggle('active');
-        
-        // Trap focus in menu when open
-        if (!isExpanded) {
-            const firstLink = navMenu.querySelector('a');
-            if (firstLink) firstLink.focus();
-        }
-    });
-    
-    // Close menu when clicking outside
-    document.addEventListener('click', (e) => {
-        if (!menuToggle.contains(e.target) && !navMenu.contains(e.target)) {
-            menuToggle.setAttribute('aria-expanded', 'false');
-            navMenu.classList.remove('active');
-        }
-    });
-    
-    // Close menu on escape key
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && navMenu.classList.contains('active')) {
-            menuToggle.setAttribute('aria-expanded', 'false');
-            navMenu.classList.remove('active');
-            menuToggle.focus();
-        }
-    });
-    
-    // Close menu when window is resized to desktop
-    window.addEventListener('resize', debounce(() => {
-        if (window.innerWidth > 768) {
-            menuToggle.setAttribute('aria-expanded', 'false');
-            navMenu.classList.remove('active');
-        }
-    }, 250));
-}
-
-/**
- * Handle header visibility on scroll
- */
-function initHeaderScroll() {
-    const header = document.querySelector('.header');
-    if (!header) return;
-    
-    let lastScrollTop = 0;
-    
-    const handleScroll = throttle(() => {
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        
-        // Hide header when scrolling down, show when scrolling up
-        if (scrollTop > lastScrollTop && scrollTop > 100) {
-            header.style.transform = 'translateY(-100%)';
-        } else {
-            header.style.transform = 'translateY(0)';
-        }
-        
-        lastScrollTop = scrollTop;
-    }, 100);
-    
-    window.addEventListener('scroll', handleScroll, { passive: true });
-}
-
-// ==========================================
-// BACK TO TOP BUTTON
-// ==========================================
-
-/**
- * Initialize back to top button
- */
-function initBackToTop() {
-    const backToTopBtn = document.getElementById('back-to-top');
-    if (!backToTopBtn) return;
-    
-    const handleScroll = throttle(() => {
-        if (window.pageYOffset > 300) {
-            backToTopBtn.classList.add('visible');
-        } else {
-            backToTopBtn.classList.remove('visible');
-        }
-    }, 100);
-    
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    
-    backToTopBtn.addEventListener('click', () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    });
-}
-
-// ==========================================
-// SMOOTH SCROLLING
-// ==========================================
-
-/**
- * Initialize smooth scrolling for anchor links
- */
-function initSmoothScroll() {
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            const href = this.getAttribute('href');
-            
-            // Skip if href is just "#"
-            if (href === '#') return;
-            
-            const target = document.querySelector(href);
-            if (target) {
-                e.preventDefault();
-                
-                const headerOffset = 100;
-                const elementPosition = target.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-                
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth'
-                });
-                
-                // Set focus for accessibility
-                target.setAttribute('tabindex', '-1');
-                target.focus();
+        // Close on Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+                menuToggle.setAttribute('aria-expanded', 'false');
+                navMenu.classList.remove('active');
+                menuToggle.focus();
             }
         });
-    });
-}
+        
+        // Close on outside click
+        document.addEventListener('click', (e) => {
+            if (!menuToggle.contains(e.target) && !navMenu.contains(e.target)) {
+                menuToggle.setAttribute('aria-expanded', 'false');
+                navMenu.classList.remove('active');
+            }
+        });
+        
+        // Close on window resize
+        window.addEventListener('resize', Utils.debounce(() => {
+            if (window.innerWidth > 768) {
+                menuToggle.setAttribute('aria-expanded', 'false');
+                navMenu.classList.remove('active');
+            }
+        }, 250));
+    },
 
-// ==========================================
-// LAZY LOADING
-// ==========================================
+    // Back to Top Button
+    initBackToTop() {
+        const backToTopBtn = document.getElementById('back-to-top');
+        if (!backToTopBtn) return;
+        
+        const handleScroll = Utils.throttle(() => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        }, 100);
+        
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    },
 
-/**
- * Initialize lazy loading for images
- */
-function initLazyLoading() {
-    const images = document.querySelectorAll('img[loading="lazy"]');
-    
-    if ('IntersectionObserver' in window) {
-        const imageObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
+    // Smooth Scrolling for Anchor Links
+    initSmoothScroll() {
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href === '#') return;
+                
+                const target = document.querySelector(href);
+                if (target) {
+                    e.preventDefault();
                     
-                    // Preload image
-                    const tempImg = new Image();
-                    tempImg.onload = () => {
-                        img.src = img.dataset.src || img.src;
+                    const headerOffset = 100;
+                    const elementPosition = target.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                    
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                    
+                    target.setAttribute('tabindex', '-1');
+                    target.focus();
+                }
+            });
+        });
+    },
+
+    // Lazy Loading Images
+    initLazyLoading() {
+        const images = document.querySelectorAll('img[loading="lazy"]');
+        
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
                         img.classList.add('loaded');
-                    };
-                    tempImg.src = img.dataset.src || img.src;
+                        imageObserver.unobserve(img);
+                    }
+                });
+            }, {
+                rootMargin: '50px'
+            });
+            
+            images.forEach(img => imageObserver.observe(img));
+        }
+    },
+
+    // Accessibility Enhancements
+    enhanceAccessibility() {
+        // Make cards keyboard accessible
+        const cards = document.querySelectorAll(
+            '.feature-card, .attraction-card, .beach-card, .season-card, ' +
+            '.transport-card, .package-card, .timeline-item, .heritage-card'
+        );
+        
+        cards.forEach(card => {
+            if (!card.hasAttribute('tabindex')) {
+                card.setAttribute('tabindex', '0');
+            }
+            
+            card.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    card.click();
+                }
+            });
+        });
+    },
+
+    // Performance Logging
+    logPerformance() {
+        if ('performance' in window) {
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    const perfData = performance.getEntriesByType('navigation')[0];
+                    if (perfData) {
+                        console.log('Performance Metrics:');
+                        console.log('- DOM Content Loaded:', Math.round(perfData.domContentLoadedEventEnd - perfData.domContentLoadedEventStart), 'ms');
+                        console.log('- Page Load Time:', Math.round(perfData.loadEventEnd - perfData.loadEventStart), 'ms');
+                    }
+                }, 0);
+            });
+        }
+    }
+};
+
+// ==========================================
+// ATTRACTIONS PAGE FEATURES
+// ==========================================
+
+const AttractionsPage = {
+    init() {
+        this.initSearch();
+        this.initFilters();
+    },
+
+    initSearch() {
+        const searchInput = document.getElementById('attraction-search');
+        if (!searchInput) return;
+
+        const searchAttractions = () => {
+            const searchTerm = searchInput.value.toLowerCase().trim();
+            const attractions = document.querySelectorAll('.attraction-card');
+            let visibleCount = 0;
+
+            attractions.forEach(card => {
+                const title = card.querySelector('.attraction-title')?.textContent.toLowerCase() || '';
+                const description = card.querySelector('.attraction-description')?.textContent.toLowerCase() || '';
+                const location = card.querySelector('.attraction-location')?.textContent.toLowerCase() || '';
+
+                const matches = title.includes(searchTerm) || 
+                               description.includes(searchTerm) || 
+                               location.includes(searchTerm);
+
+                if (matches || searchTerm === '') {
+                    card.style.display = '';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            this.announceResults(visibleCount, attractions.length);
+        };
+
+        searchInput.addEventListener('input', Utils.debounce(searchAttractions, 300));
+    },
+
+    initFilters() {
+        const filterButtons = document.querySelectorAll('.filter-tab');
+        if (!filterButtons.length) return;
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const category = button.getAttribute('data-category');
+                
+                // Update active state
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                
+                // Filter attractions
+                const attractions = document.querySelectorAll('.attraction-card');
+                let visibleCount = 0;
+
+                attractions.forEach(card => {
+                    const cardCategory = card.getAttribute('data-category');
                     
-                    observer.unobserve(img);
+                    if (category === 'all' || cardCategory === category) {
+                        card.style.display = '';
+                        visibleCount++;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+
+                this.announceResults(visibleCount, attractions.length);
+            });
+        });
+    },
+
+    announceResults(visible, total) {
+        const announcement = `Showing ${visible} of ${total} attractions`;
+        const announcer = document.getElementById('search-announcer');
+        
+        if (announcer) {
+            announcer.textContent = announcement;
+        } else {
+            // Create announcer if it doesn't exist
+            const div = document.createElement('div');
+            div.id = 'search-announcer';
+            div.className = 'sr-only';
+            div.setAttribute('aria-live', 'polite');
+            div.textContent = announcement;
+            document.body.appendChild(div);
+        }
+    }
+};
+
+// ==========================================
+// BEACHES PAGE FEATURES
+// ==========================================
+
+const BeachesPage = {
+    init() {
+        this.initRegionFiltering();
+    },
+
+    initRegionFiltering() {
+        const regionCards = document.querySelectorAll('.region-card');
+        if (!regionCards.length) return;
+
+        regionCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const region = card.getAttribute('data-region');
+                this.filterBeaches(region);
+            });
+
+            // Keyboard support
+            card.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    card.click();
                 }
             });
-        }, {
-            rootMargin: '50px'
         });
+    },
+
+    filterBeaches(region) {
+        const beaches = document.querySelectorAll('.beach-card');
+        let visibleCount = 0;
+
+        beaches.forEach(beach => {
+            const beachRegion = beach.getAttribute('data-region');
+            
+            if (region === 'all' || beachRegion === region) {
+                beach.style.display = '';
+                visibleCount++;
+            } else {
+                beach.style.display = 'none';
+            }
+        });
+
+        // Scroll to beaches section
+        const beachesSection = document.querySelector('.featured-beaches');
+        if (beachesSection) {
+            const headerOffset = 100;
+            const elementPosition = beachesSection.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+            
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+        }
+
+        // Announce results
+        const announcement = `Showing ${visibleCount} beaches in ${region === 'all' ? 'all regions' : region}`;
+        const announcer = document.getElementById('filter-announcer');
         
-        images.forEach(img => imageObserver.observe(img));
-    } else {
-        // Fallback for browsers that don't support IntersectionObserver
-        images.forEach(img => {
-            img.src = img.dataset.src || img.src;
-        });
+        if (announcer) {
+            announcer.textContent = announcement;
+        } else {
+            const div = document.createElement('div');
+            div.id = 'filter-announcer';
+            div.className = 'sr-only';
+            div.setAttribute('aria-live', 'polite');
+            div.textContent = announcement;
+            document.body.appendChild(div);
+        }
     }
-}
+};
 
 // ==========================================
-// ANIMATION ON SCROLL
+// CULTURE PAGE FEATURES
 // ==========================================
 
-/**
- * Initialize animation on scroll
- */
-function initScrollAnimations() {
-    const animatedElements = document.querySelectorAll('.card, .section-title');
-    
-    if ('IntersectionObserver' in window) {
-        const animationObserver = new IntersectionObserver((entries) => {
-            entries.forEach((entry, index) => {
-                if (entry.isIntersecting) {
-                    setTimeout(() => {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }, index * 100);
-                    animationObserver.unobserve(entry.target);
+const CulturePage = {
+    init() {
+        this.initTimelineAnimations();
+        this.initCardAnimations();
+    },
+
+    initTimelineAnimations() {
+        const timelineItems = document.querySelectorAll('.timeline-item');
+        if (!timelineItems.length) return;
+        
+        if ('IntersectionObserver' in window) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateX(0)';
+                        }, index * 100);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.2
+            });
+            
+            timelineItems.forEach(item => {
+                item.style.opacity = '0';
+                item.style.transform = 'translateX(-30px)';
+                item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(item);
+            });
+        }
+    },
+
+    initCardAnimations() {
+        const cards = document.querySelectorAll('.highlight-card, .heritage-card');
+        if (!cards.length) return;
+        
+        if ('IntersectionObserver' in window) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }, index * 80);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(card);
+            });
+        }
+    }
+};
+
+// ==========================================
+// PLAN TRIP PAGE FEATURES
+// ==========================================
+
+const PlanTripPage = {
+    selectedInterests: [],
+
+    init() {
+        this.initInterestTags();
+        this.initDateValidation();
+        this.initFormSubmission();
+    },
+
+    initInterestTags() {
+        const interestTags = document.querySelectorAll('.interest-tag');
+        if (!interestTags.length) return;
+        
+        interestTags.forEach(tag => {
+            tag.addEventListener('click', () => {
+                const interest = tag.getAttribute('data-interest');
+                
+                // Toggle active state
+                tag.classList.toggle('active');
+                
+                // Update selected interests
+                if (this.selectedInterests.includes(interest)) {
+                    this.selectedInterests = this.selectedInterests.filter(i => i !== interest);
+                } else {
+                    this.selectedInterests.push(interest);
+                }
+                
+                console.log('Selected interests:', this.selectedInterests);
+            });
+            
+            // Keyboard support
+            tag.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    tag.click();
                 }
             });
-        }, {
-            threshold: 0.1
         });
+    },
+
+    initDateValidation() {
+        const checkinInput = document.getElementById('checkin-date');
+        const checkoutInput = document.getElementById('checkout-date');
         
-        animatedElements.forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            animationObserver.observe(el);
+        if (!checkinInput || !checkoutInput) return;
+        
+        // Set minimum date to today
+        const today = new Date().toISOString().split('T')[0];
+        checkinInput.setAttribute('min', today);
+        
+        // Update checkout min date when checkin changes
+        checkinInput.addEventListener('change', () => {
+            const checkinDate = checkinInput.value;
+            if (checkinDate) {
+                const nextDay = new Date(checkinDate);
+                nextDay.setDate(nextDay.getDate() + 1);
+                checkoutInput.setAttribute('min', nextDay.toISOString().split('T')[0]);
+            }
         });
-    }
-}
+    },
 
-// ==========================================
-// FORM HANDLING
-// ==========================================
+    validateDates(checkinDate, checkoutDate) {
+        const checkin = new Date(checkinDate);
+        const checkout = new Date(checkoutDate);
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        
+        if (checkin < today) {
+            return { valid: false, message: 'Check-in date must be today or later' };
+        }
+        
+        if (checkout <= checkin) {
+            return { valid: false, message: 'Check-out date must be after check-in date' };
+        }
+        
+        return { valid: true };
+    },
 
-/**
- * Initialize form handlers (ready for AJAX)
- */
-function initForms() {
-    const forms = document.querySelectorAll('form[data-ajax]');
-    
-    forms.forEach(form => {
+    initFormSubmission() {
+        const form = document.getElementById('trip-form');
+        if (!form) return;
+        
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             
+            // Get form data
             const formData = new FormData(form);
-            const submitButton = form.querySelector('[type="submit"]');
+            const checkinDate = formData.get('checkin-date');
+            const checkoutDate = formData.get('checkout-date');
+            const travelers = formData.get('travelers');
+            const specialRequests = formData.get('special-requests');
             
-            // Disable submit button
-            if (submitButton) {
-                submitButton.disabled = true;
-                submitButton.textContent = 'Submitting...';
+            // Validate dates
+            const dateValidation = this.validateDates(checkinDate, checkoutDate);
+            if (!dateValidation.valid) {
+                Utils.showNotification(dateValidation.message, 'error');
+                return;
             }
             
-            // Example: Submit to API
-            const result = await submitTripPlan(formData);
-            
-            // Re-enable submit button
-            if (submitButton) {
-                submitButton.disabled = false;
-                submitButton.textContent = 'Submit';
+            // Validate interests
+            if (this.selectedInterests.length === 0) {
+                Utils.showNotification('Please select at least one travel interest', 'error');
+                return;
             }
             
-            if (result) {
-                form.reset();
-            }
-        });
-    });
-}
-
-// ==========================================
-// PERFORMANCE MONITORING
-// ==========================================
-
-/**
- * Log performance metrics
- */
-function logPerformance() {
-    if ('performance' in window) {
-        window.addEventListener('load', () => {
+            // Prepare data
+            const tripData = {
+                checkinDate,
+                checkoutDate,
+                travelers,
+                interests: this.selectedInterests,
+                specialRequests
+            };
+            
+            console.log('Trip data:', tripData);
+            
+            // Show loading state
+            const submitBtn = form.querySelector('.submit-btn');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Creating Itinerary...';
+            submitBtn.disabled = true;
+            
+            // Simulate API call
             setTimeout(() => {
-                const perfData = performance.getEntriesByType('navigation')[0];
-                console.log('Performance Metrics:');
-                console.log('- DOM Content Loaded:', perfData.domContentLoadedEventEnd - perfData.domContentLoadedEventStart, 'ms');
-                console.log('- Page Load Time:', perfData.loadEventEnd - perfData.loadEventStart, 'ms');
-                console.log('- Total Load Time:', perfData.loadEventEnd - perfData.fetchStart, 'ms');
-            }, 0);
+                Utils.showNotification('Custom itinerary created successfully!', 'success');
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }, 1500);
         });
     }
-}
+};
 
 // ==========================================
-// ACCESSIBILITY ENHANCEMENTS
+// HOME PAGE FEATURES
 // ==========================================
 
-/**
- * Announce page changes to screen readers
- * @param {string} message - Message to announce
- */
-function announceToScreenReader(message) {
-    const announcement = document.createElement('div');
-    announcement.setAttribute('role', 'status');
-    announcement.setAttribute('aria-live', 'polite');
-    announcement.setAttribute('aria-atomic', 'true');
-    announcement.className = 'sr-only';
-    announcement.textContent = message;
-    
-    document.body.appendChild(announcement);
-    
-    setTimeout(() => {
-        announcement.remove();
-    }, 1000);
-}
+const HomePage = {
+    init() {
+        this.initFeatureCards();
+        this.renderTeamMembers();
+    },
 
-/**
- * Ensure keyboard navigation for interactive elements
- */
-function enhanceKeyboardNav() {
-    // Add keyboard support to card links
-    const cards = document.querySelectorAll('.card');
-    
-    cards.forEach(card => {
-        card.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-                const link = card.querySelector('.learn-more');
-                if (link) {
-                    e.preventDefault();
-                    link.click();
-                }
-            }
-        });
-    });
-}
-
-// ==========================================
-// THIRD-PARTY API INTEGRATION EXAMPLES
-// ==========================================
-
-/**
- * Example: Weather API integration
- */
-async function loadWeather() {
-    // Placeholder for weather API integration
-    // const result = await fetch('https://api.weatherapi.com/v1/current.json?key=YOUR_KEY&q=Goa');
-    console.log('Ready for Weather API integration');
-}
-
-/**
- * Example: Google Maps API integration
- */
-function initMap() {
-    // Placeholder for Google Maps integration
-    // This would initialize Google Maps with Goa locations
-    console.log('Ready for Google Maps API integration');
-}
-
-/**
- * Example: Social Media Share functionality
- */
-function initSocialShare() {
-    const shareButtons = document.querySelectorAll('[data-share]');
-    
-    shareButtons.forEach(button => {
-        button.addEventListener('click', async (e) => {
-            e.preventDefault();
+    initFeatureCards() {
+        const cards = document.querySelectorAll('.feature-card');
+        if (!cards.length) return;
+        
+        if ('IntersectionObserver' in window) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }, index * 100);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
             
-            if (navigator.share) {
-                try {
-                    await navigator.share({
-                        title: 'Visit Goa',
-                        text: 'Discover paradise in Goa!',
-                        url: window.location.href
-                    });
-                } catch (err) {
-                    console.log('Share failed:', err);
-                }
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(card);
+            });
+        }
+    },
+
+    renderTeamMembers() {
+        // Team data
+        const teamMembers = [
+            {
+                name: "Team Member 1",
+                role: "Frontend Developer",
+                contribution: "Homepage & Responsive Design"
+            },
+            {
+                name: "Team Member 2",
+                role: "Backend Developer",
+                contribution: "API Integration & Database"
+            },
+            {
+                name: "Team Member 3",
+                role: "UI/UX Designer",
+                contribution: "Design & User Experience"
+            },
+            {
+                name: "Team Member 4",
+                role: "Content Writer",
+                contribution: "Content & Documentation"
             }
-        });
-    });
-}
+        ];
 
-// ==========================================
-// INITIALIZATION
-// ==========================================
+        const teamContainer = document.getElementById('team-members');
+        if (!teamContainer) return;
 
-/**
- * Initialize all functionality when DOM is ready
- */
-document.addEventListener('DOMContentLoaded', () => {
-    console.log('Visit Goa - Website Initialized');
-    
-    // Navigation
-    initMobileNav();
-    initHeaderScroll();
-    
-    // UI Features
-    initBackToTop();
-    initSmoothScroll();
-    initLazyLoading();
-    initScrollAnimations();
-    
-    // Forms & Data
-    initForms();
-    loadTeamMembers();
-    loadAttractions();
-    
-    // Accessibility
-    enhanceKeyboardNav();
-    
-    // Third-party integrations (ready for implementation)
-    // loadWeather();
-    // initMap();
-    initSocialShare();
-    
-    // Performance
-    logPerformance();
-    
-    // Mark API container as ready
-    const apiContainer = document.getElementById('api-data-container');
-    if (apiContainer) {
-        apiContainer.setAttribute('data-api-ready', 'true');
+        // Render team members (if needed)
+        console.log('Team members ready:', teamMembers);
     }
+};
+
+// ==========================================
+// API INTEGRATION (Ready for all pages)
+// ==========================================
+
+const API = {
+    baseURL: '/api',
+    
+    async fetchAttractions() {
+        try {
+            const response = await fetch(`${this.baseURL}/attractions`);
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            return await response.json();
+        } catch (error) {
+            console.error('Failed to fetch attractions:', error);
+            return { success: false, error: error.message };
+        }
+    },
+
+    async fetchBeaches(region = 'all') {
+        try {
+            const url = region === 'all' 
+                ? `${this.baseURL}/beaches` 
+                : `${this.baseURL}/beaches/region/${region}`;
+            const response = await fetch(url);
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            return await response.json();
+        } catch (error) {
+            console.error('Failed to fetch beaches:', error);
+            return { success: false, error: error.message };
+        }
+    },
+
+    async submitTripPlan(tripData) {
+        try {
+            const response = await fetch(`${this.baseURL}/trip/create-itinerary`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(tripData)
+            });
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            return await response.json();
+        } catch (error) {
+            console.error('Failed to submit trip plan:', error);
+            throw error;
+        }
+    }
+};
+
+// ==========================================
+// MAIN INITIALIZATION
+// ==========================================
+
+document.addEventListener('DOMContentLoaded', () => {
+    const currentPage = PageDetector.getCurrentPage();
+    console.log(`Site.js initialized on: ${currentPage} page`);
+    
+    // Initialize shared features (all pages)
+    SharedFeatures.initMobileNav();
+    SharedFeatures.initBackToTop();
+    SharedFeatures.initSmoothScroll();
+    SharedFeatures.initLazyLoading();
+    SharedFeatures.enhanceAccessibility();
+    SharedFeatures.logPerformance();
+    
+    // Initialize page-specific features
+    switch(currentPage) {
+        case 'attractions':
+            AttractionsPage.init();
+            console.log('Attractions features loaded');
+            break;
+            
+        case 'beaches':
+            BeachesPage.init();
+            console.log('Beaches features loaded');
+            break;
+            
+        case 'culture':
+            CulturePage.init();
+            console.log('Culture features loaded');
+            break;
+            
+        case 'plan-trip':
+            PlanTripPage.init();
+            console.log('Plan Trip features loaded');
+            break;
+            
+        case 'home':
+            HomePage.init();
+            console.log('Homepage features loaded');
+            break;
+            
+        default:
+            console.log('Basic features loaded');
+    }
+    
+    console.log('All features initialized successfully!');
 });
 
 // ==========================================
-// SERVICE WORKER REGISTRATION (PWA Ready)
+// EXPORT FOR MODULES (if needed)
 // ==========================================
 
-/**
- * Register service worker for PWA functionality
- */
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        // Service worker registration is ready but not implemented yet
-        // navigator.serviceWorker.register('/service-worker.js')
-        //     .then(registration => console.log('SW registered:', registration))
-        //     .catch(err => console.log('SW registration failed:', err));
-    });
-}
-
-// ==========================================
-// EXPORT FOR MODULES (if using ES6 modules)
-// ==========================================
-
-// Export functions for use in other modules
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
-        apiGet,
-        apiPost,
-        submitTripPlan,
-        showNotification,
-        announceToScreenReader
+        Utils,
+        PageDetector,
+        SharedFeatures,
+        AttractionsPage,
+        BeachesPage,
+        CulturePage,
+        PlanTripPage,
+        HomePage,
+        API
     };
 }

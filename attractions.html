@@ -78,7 +78,7 @@
                 <li role="none"><a href="attractions.html" role="menuitem" aria-current="page">Attractions</a></li>
                 <li role="none"><a href="beaches.html" role="menuitem">Beaches</a></li>
                 <li role="none"><a href="culture.html" role="menuitem">Culture</a></li>
-                <li role="none"><a href="plan-trip.html" role="menuitem">Plan Trip</a></li>
+                <li role="none"><a href="plan.html" role="menuitem">Plan Trip</a></li>
             </ul>
         </nav>
     </header>
@@ -107,7 +107,7 @@
                        
                         <input 
                             type="text" 
-                            id="search-input"
+                            id="attraction-search"
                             placeholder="🔍︎​Search attractions..."
                             aria-label="Search for attractions">
                     </div>
@@ -118,35 +118,35 @@
                                 role="tab" 
                                 aria-selected="true"
                                 aria-controls="attractions-grid"
-                                data-filter="all">
+                                data-category="all">
                             All
                         </button>
                         <button class="filter-tab" 
                                 role="tab" 
                                 aria-selected="false"
                                 aria-controls="attractions-grid"
-                                data-filter="church">
+                                data-category="churches">
                             Churches
                         </button>
                         <button class="filter-tab" 
                                 role="tab" 
                                 aria-selected="false"
                                 aria-controls="attractions-grid"
-                                data-filter="temple">
+                                data-category="temple">
                             Temples
                         </button>
                         <button class="filter-tab" 
                                 role="tab" 
                                 aria-selected="false"
                                 aria-controls="attractions-grid"
-                                data-filter="fort">
+                                data-category="fort">
                             Forts
                         </button>
                         <button class="filter-tab" 
                                 role="tab" 
                                 aria-selected="false"
                                 aria-controls="attractions-grid"
-                                data-filter="museum">
+                                data-category="museum">
                             Museums
                         </button>
                     </div>
@@ -161,7 +161,7 @@
                 
                 <div class="attractions-grid" id="attractions-grid" role="list">
                     <!-- Attraction Card 1 - Basilica of Bom Jesus -->
-                    <article class="attraction-card hreview" data-category="church" role="listitem">
+                    <article class="attraction-card hreview" data-category="churches" role="listitem">
                         <div class="card-image-wrapper">
                             <img src="pictures/Church.png" 
                                  alt="Basilica of Bom Jesus white facade and architectural details" 
@@ -271,7 +271,7 @@
                     </article>
 
                     <!-- Attraction Card 4 - Se Cathedral -->
-                    <article class="attraction-card hreview" data-category="church" role="listitem">
+                    <article class="attraction-card hreview" data-category="churches" role="listitem">
                         <div class="card-image-wrapper">
                             <img src="pictures/Ancestral.png" 
                                  alt="Se Cathedral with Portuguese-Gothic architecture" 
@@ -415,7 +415,7 @@
                     </article>
 
                     <!-- Attraction Card 8 - Church of Our Lady -->
-                    <article class="attraction-card hreview" data-category="church" role="listitem">
+                    <article class="attraction-card hreview" data-category="churches" role="listitem">
                         <div class="card-image-wrapper">
                             <img src="pictures/Church.png" 
                                  alt="Church of Our Lady with baroque architecture" 
@@ -535,7 +535,7 @@
             </div>
 
             <div class="footer-bottom">
-                <p>&copy; 2024 Visit Goa Student Project. Educational Use Only.</p>
+                <p>&copy; 2025 Visit Goa Student Project. Educational Use Only.</p>
             </div>
         </div>
     </footer>
