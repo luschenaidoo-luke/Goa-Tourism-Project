@@ -632,6 +632,22 @@ const PlanTripPage = {
         return { valid: true };
     },
 
+
+    validateEmail(email) {
+        // Check if email is provided
+        if (!email || email.trim() === '') {
+            return { valid: false, message: 'Please enter your email address' };
+        }
+        
+        // Regular expression for email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        
+        if (!emailRegex.test(email)) {
+            return { valid: false, message: 'Please enter a valid email address' };
+        }
+        
+        return { valid: true };
+    },
     initFormSubmission() {
         const form = document.getElementById('trip-form');
         if (!form) return;
@@ -641,15 +657,32 @@ const PlanTripPage = {
             
             // Get form data
             const formData = new FormData(form);
+            const email = formData.get('email');
             const checkinDate = formData.get('checkin-date');
             const checkoutDate = formData.get('checkout-date');
             const travelers = formData.get('travelers');
             const specialRequests = formData.get('special-requests');
             
+            // Validate email FIRST
+            const emailValidation = this.validateEmail(email);
+            if (!emailValidation.valid) {
+                Utils.showNotification(emailValidation.message, 'error');
+                // Focus on email field for better UX
+                const emailInput = document.getElementById('email');
+                if (emailInput) emailInput.focus();
+                return;
+            }
+            
             // Validate dates
             const dateValidation = this.validateDates(checkinDate, checkoutDate);
             if (!dateValidation.valid) {
                 Utils.showNotification(dateValidation.message, 'error');
+                return;
+            }
+            
+            // Validate travelers
+            if (!travelers) {
+                Utils.showNotification('Please select number of travelers', 'error');
                 return;
             }
             
@@ -661,6 +694,7 @@ const PlanTripPage = {
             
             // Prepare data
             const tripData = {
+                email,
                 checkinDate,
                 checkoutDate,
                 travelers,
@@ -678,7 +712,7 @@ const PlanTripPage = {
             
             // Simulate API call
             setTimeout(() => {
-                Utils.showNotification('Custom itinerary created successfully!', 'success');
+                Utils.showNotification(`Itinerary sent to ${email}!`, 'success');
                 submitBtn.textContent = originalText;
                 submitBtn.disabled = false;
             }, 1500);
