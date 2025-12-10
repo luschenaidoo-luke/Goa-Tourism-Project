@@ -337,9 +337,9 @@ const AttractionsPage = {
             let visibleCount = 0;
 
             attractions.forEach(card => {
-                const title = card.querySelector('.attraction-title')?.textContent.toLowerCase() || '';
-                const description = card.querySelector('.attraction-description')?.textContent.toLowerCase() || '';
-                const location = card.querySelector('.attraction-location')?.textContent.toLowerCase() || '';
+                const title = card.querySelector('.card-title')?.textContent.toLowerCase() || '';
+                const description = card.querySelector('.card-description')?.textContent.toLowerCase() || '';
+                const location = card.querySelector('.card-location')?.textContent.toLowerCase() || '';
 
                 const matches = title.includes(searchTerm) || 
                                description.includes(searchTerm) || 
