@@ -260,23 +260,20 @@ const AttractionsPage = {
     init() {
         this.initSearch();
         this.initFilters();
-        this.applyURLFilter(); // Apply filter from URL if present
-        this.initLoadMore(); // Handle load more button
+        this.applyURLFilter();
+        this.initLoadMore();
     },
+
     applyURLFilter() {
-        // Get filter parameter from URL (e.g., ?filter=churches)
         const urlParams = new URLSearchParams(window.location.search);
         const filterCategory = urlParams.get('filter');
         
         if (filterCategory) {
-            // Find the button with matching category
             const targetButton = document.querySelector(`.filter-tab[data-category="${filterCategory}"]`);
             
             if (targetButton) {
-                // Trigger click on the button to activate filter
                 targetButton.click();
                 
-                // Smooth scroll to attractions section after brief delay
                 setTimeout(() => {
                     const attractionsSection = document.querySelector('.attractions-grid');
                     if (attractionsSection) {
@@ -299,10 +296,8 @@ const AttractionsPage = {
         if (!loadMoreBtn) return;
         
         loadMoreBtn.addEventListener('click', () => {
-            // Hide the button
             loadMoreBtn.style.display = 'none';
             
-            // Create and show themed message
             const messageDiv = document.createElement('div');
             messageDiv.className = 'no-more-message';
             messageDiv.innerHTML = `
@@ -315,17 +310,14 @@ const AttractionsPage = {
                 <div class="message-badge">Coming Soon</div>
             `;
             
-            // Insert message where button was
             const wrapper = loadMoreBtn.parentElement;
             wrapper.appendChild(messageDiv);
             
-            // Smooth scroll to message
             setTimeout(() => {
                 messageDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }, 100);
         });
     },
-
 
     initSearch() {
         const searchInput = document.getElementById('attraction-search');
@@ -367,11 +359,9 @@ const AttractionsPage = {
             button.addEventListener('click', () => {
                 const category = button.getAttribute('data-category');
                 
-                // Update active state
                 filterButtons.forEach(btn => btn.classList.remove('active'));
                 button.classList.add('active');
                 
-                // Filter attractions
                 const attractions = document.querySelectorAll('.attraction-card');
                 let visibleCount = 0;
 
@@ -398,7 +388,6 @@ const AttractionsPage = {
         if (announcer) {
             announcer.textContent = announcement;
         } else {
-            // Create announcer if it doesn't exist
             const div = document.createElement('div');
             div.id = 'search-announcer';
             div.className = 'sr-only';
@@ -428,7 +417,6 @@ const BeachesPage = {
                 this.filterBeaches(region);
             });
 
-            // Keyboard support
             card.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
@@ -453,7 +441,6 @@ const BeachesPage = {
             }
         });
 
-        // Scroll to beaches section
         const beachesSection = document.querySelector('.featured-beaches');
         if (beachesSection) {
             const headerOffset = 100;
@@ -466,7 +453,6 @@ const BeachesPage = {
             });
         }
 
-        // Announce results
         const announcement = `Showing ${visibleCount} beaches in ${region === 'all' ? 'all regions' : region}`;
         const announcer = document.getElementById('filter-announcer');
         
@@ -571,10 +557,8 @@ const PlanTripPage = {
             tag.addEventListener('click', () => {
                 const interest = tag.getAttribute('data-interest');
                 
-                // Toggle active state
                 tag.classList.toggle('active');
                 
-                // Update selected interests
                 if (this.selectedInterests.includes(interest)) {
                     this.selectedInterests = this.selectedInterests.filter(i => i !== interest);
                 } else {
@@ -584,7 +568,6 @@ const PlanTripPage = {
                 console.log('Selected interests:', this.selectedInterests);
             });
             
-            // Keyboard support
             tag.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
@@ -600,11 +583,9 @@ const PlanTripPage = {
         
         if (!checkinInput || !checkoutInput) return;
         
-        // Set minimum date to today
         const today = new Date().toISOString().split('T')[0];
         checkinInput.setAttribute('min', today);
         
-        // Update checkout min date when checkin changes
         checkinInput.addEventListener('change', () => {
             const checkinDate = checkinInput.value;
             if (checkinDate) {
@@ -632,14 +613,11 @@ const PlanTripPage = {
         return { valid: true };
     },
 
-
     validateEmail(email) {
-        // Check if email is provided
         if (!email || email.trim() === '') {
             return { valid: false, message: 'Please enter your email address' };
         }
         
-        // Regular expression for email validation
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         
         if (!emailRegex.test(email)) {
@@ -648,75 +626,126 @@ const PlanTripPage = {
         
         return { valid: true };
     },
+
+    // ── UPDATED: now calls the real PHP backend ────────────────────────────────
     initFormSubmission() {
         const form = document.getElementById('trip-form');
         if (!form) return;
-        
+
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
-            
-            // Get form data
-            const formData = new FormData(form);
-            const email = formData.get('email');
-            const checkinDate = formData.get('checkin-date');
-            const checkoutDate = formData.get('checkout-date');
-            const travelers = formData.get('travelers');
+
+            // Collect form data
+            const formData        = new FormData(form);
+            const email           = formData.get('email');
+            const checkinDate     = formData.get('checkin-date');
+            const checkoutDate    = formData.get('checkout-date');
+            const travelers       = formData.get('travelers');
             const specialRequests = formData.get('special-requests');
-            
-            // Validate email FIRST
+
+            // Client-side validation
             const emailValidation = this.validateEmail(email);
             if (!emailValidation.valid) {
                 Utils.showNotification(emailValidation.message, 'error');
-                // Focus on email field for better UX
-                const emailInput = document.getElementById('email');
-                if (emailInput) emailInput.focus();
+                document.getElementById('email')?.focus();
                 return;
             }
-            
-            // Validate dates
+
             const dateValidation = this.validateDates(checkinDate, checkoutDate);
             if (!dateValidation.valid) {
                 Utils.showNotification(dateValidation.message, 'error');
                 return;
             }
-            
-            // Validate travelers
+
             if (!travelers) {
                 Utils.showNotification('Please select number of travelers', 'error');
                 return;
             }
-            
-            // Validate interests
+
             if (this.selectedInterests.length === 0) {
                 Utils.showNotification('Please select at least one travel interest', 'error');
                 return;
             }
-            
-            // Prepare data
-            const tripData = {
-                email,
-                checkinDate,
-                checkoutDate,
-                travelers,
-                interests: this.selectedInterests,
-                specialRequests
-            };
-            
-            console.log('Trip data:', tripData);
-            
-            // Show loading state
-            const submitBtn = form.querySelector('.submit-btn');
+
+            // Loading state
+            const submitBtn    = form.querySelector('.submit-btn');
             const originalText = submitBtn.textContent;
             submitBtn.textContent = 'Creating Itinerary...';
-            submitBtn.disabled = true;
-            
-            // Simulate API call
-            setTimeout(() => {
-                Utils.showNotification(`Itinerary sent to ${email}!`, 'success');
+            submitBtn.disabled    = true;
+
+            try {
+                // Step 1: Fetch CSRF token from server
+                const csrfResponse = await fetch(`${API.baseURL}/csrf-token`);
+                if (!csrfResponse.ok) throw new Error('Could not fetch security token');
+                const { token: csrfToken } = await csrfResponse.json();
+
+                // Step 2: Submit trip plan with CSRF token in header
+                const response = await fetch(`${API.baseURL}/trip/create-itinerary`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-Token': csrfToken,
+                    },
+                    body: JSON.stringify({
+                        email,
+                        checkinDate,
+                        checkoutDate,
+                        travelers,
+                        interests:       this.selectedInterests,
+                        specialRequests: specialRequests || '',
+                    }),
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    const msg = data.errors?.join(' ') || data.error || 'Something went wrong.';
+                    Utils.showNotification(msg, 'error');
+                    return;
+                }
+
+                // Step 3: Show success and render the itinerary
+                Utils.showNotification(data.message, 'success');
+                form.reset();
+                this.selectedInterests = [];
+                document.querySelectorAll('.interest-tag').forEach(t => t.classList.remove('active'));
+
+                if (data.itinerary) {
+                    this.renderItinerary(data.itinerary);
+                }
+
+            } catch (err) {
+                console.error('Trip form error:', err);
+                Utils.showNotification('Network error. Please check your connection and try again.', 'error');
+            } finally {
                 submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
-            }, 1500);
+                submitBtn.disabled    = false;
+            }
         });
+    },
+
+    // Renders the itinerary returned by the API below the form
+    renderItinerary(itinerary) {
+        document.getElementById('itinerary-result')?.remove();
+
+        const container = document.createElement('div');
+        container.id    = 'itinerary-result';
+        container.style.cssText = 'margin-top:2rem;padding:1.5rem;background:#fff8f4;border:1px solid #f4a261;border-radius:12px;';
+        container.innerHTML = `
+            <h3 style="margin-bottom:1rem;color:#e76f51;">🗺️ Your ${itinerary.nights}-Night Itinerary</h3>
+            ${itinerary.days.map(day => `
+                <div style="margin-bottom:1rem;">
+                    <strong>${day.title}</strong>
+                    <ul style="margin-top:.4rem;padding-left:1.2rem;">
+                        ${day.activities.map(a => `<li>${a}</li>`).join('')}
+                    </ul>
+                </div>
+            `).join('')}
+        `;
+
+        const form = document.getElementById('trip-form');
+        form?.parentNode?.insertBefore(container, form.nextSibling);
+        container.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 };
 
@@ -759,34 +788,16 @@ const HomePage = {
     },
 
     renderTeamMembers() {
-        // Team data
         const teamMembers = [
-            {
-                name: "Team Member 1",
-                role: "Frontend Developer",
-                contribution: "Homepage & Responsive Design"
-            },
-            {
-                name: "Team Member 2",
-                role: "Backend Developer",
-                contribution: "API Integration & Database"
-            },
-            {
-                name: "Team Member 3",
-                role: "UI/UX Designer",
-                contribution: "Design & User Experience"
-            },
-            {
-                name: "Team Member 4",
-                role: "Content Writer",
-                contribution: "Content & Documentation"
-            }
+            { name: "Team Member 1", role: "Frontend Developer",  contribution: "Homepage & Responsive Design" },
+            { name: "Team Member 2", role: "Backend Developer",   contribution: "API Integration & Database"  },
+            { name: "Team Member 3", role: "UI/UX Designer",      contribution: "Design & User Experience"    },
+            { name: "Team Member 4", role: "Content Writer",      contribution: "Content & Documentation"     }
         ];
 
         const teamContainer = document.getElementById('team-members');
         if (!teamContainer) return;
 
-        // Render team members (if needed)
         console.log('Team members ready:', teamMembers);
     }
 };
@@ -796,7 +807,7 @@ const HomePage = {
 // ==========================================
 
 const API = {
-    baseURL: '/api',
+    baseURL: '/Goa-Tourism-Project/api',
     
     async fetchAttractions() {
         try {
